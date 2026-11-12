@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="vi">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,584 +27,694 @@
       --badge-num: #ea580c;
     }
 
-    * { box-sizing: border-box; }
-    html, body {
-      height: 100vh;
-      max-height: 100vh;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Be Vietnam Pro", Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--ink);
-      font-size: 14px;
-      line-height: 1.5;
+    * {
+      box-sizing: border-box;
     }
 
-    /* TOP GLOBAL NAVBAR */
-    .top-nav {
-      flex-shrink: 0;
-      background: #0f172a;
-      color: #fff;
-      padding: 10px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #1e293b;
-      z-index: 20;
-    }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      font-size: 15px;
-    }
-    .brand-tag {
-      background: #3b82f6;
-      color: #fff;
-      padding: 2px 7px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-    .nav-meta {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      font-size: 12.5px;
-    }
-    .clock-pill {
-      background: #1e293b;
-      padding: 4px 10px;
-      border-radius: 999px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      color: #cbd5e1;
-      border: 1px solid #334155;
-    }
-    .clock-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #f59e0b;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { opacity: 0.4; }
-      50% { opacity: 1; }
-      100% { opacity: 0.4; }
-    }
-    .ta-status {
-      background: rgba(239, 68, 68, 0.15);
-      border: 1px solid rgba(239, 68, 68, 0.4);
-      color: #fca5a5;
-      padding: 3px 10px;
-      border-radius: 999px;
-      font-weight: 600;
-    }
 
-    /* TOOLBAR CONTROL */
-    .control-bar {
-      flex-shrink: 0;
-      background: #ffffff;
-      border-bottom: 1px solid var(--line);
-      padding: 10px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-      z-index: 20;
-    }
-    .scenario-group {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .scenario-label {
-      font-size: 12.5px;
-      font-weight: 700;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-right: 4px;
-    }
-    .btn-scenario {
-      border: 1.5px solid var(--line);
-      background: #fff;
-      color: var(--ink-light);
-      padding: 6px 13px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.15s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .btn-scenario:hover {
-      background: #f1f5f9;
-      border-color: #cbd5e1;
-    }
-    .btn-scenario.active {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
-      box-shadow: 0 2px 6px rgba(37,99,235,0.25);
-    }
-    .toggle-annotations {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--ink-light);
-      cursor: pointer;
-      user-select: none;
-    }
+      html,
+      body {
+        height: 100vh;
+        max-height: 100vh;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Be Vietnam Pro", Helvetica, Arial, sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        font-size: 14px;
+        line-height: 1.5;
+      }
 
-    /* MAIN APP WORKSPACE (3-COLUMN LAYOUT) */
-    .workspace {
-      flex: 1 1 0%;
-      min-height: 0;
-      height: 100%;
-      display: grid;
-      grid-template-columns: 320px minmax(420px, 1fr) 360px;
-      overflow: hidden;
-    }
-    @media (max-width: 1200px) {
-      .workspace { grid-template-columns: 280px 1fr; }
-      .col-analysis { display: none; }
-    }
-    @media (max-width: 800px) {
-      .workspace { grid-template-columns: 1fr; }
-      .col-content { display: none; }
-    }
+      /* TOP GLOBAL NAVBAR */
+      .top-nav {
+        flex-shrink: 0;
+        background: #0f172a;
+        color: #fff;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #1e293b;
+        z-index: 20;
+      }
 
-    /* COLUMN 1: COURSE TEXT VIEWER */
-    .col-content {
-      background: #ffffff;
-      border-right: 1px solid var(--line);
-      height: 100%;
-      min-height: 0;
-      overflow-y: auto;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .course-header-tag {
-      font-size: 11px;
-      text-transform: uppercase;
-      font-weight: 700;
-      color: var(--primary);
-      letter-spacing: 0.5px;
-    }
-    .course-title {
-      font-size: 17px;
-      font-weight: 800;
-      margin: 4px 0 12px;
-      color: #0f172a;
-    }
-    .lesson-section {
-      background: #f8fafc;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 12px 14px;
-      font-size: 13px;
-    }
-    .lesson-section h4 {
-      margin: 0 0 6px;
-      font-size: 13.5px;
-      font-weight: 700;
-      color: #1e293b;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .section-badge {
-      font-size: 10.5px;
-      background: #e2e8f0;
-      padding: 1px 6px;
-      border-radius: 4px;
-      color: #475569;
-    }
-    .lesson-section p {
-      margin: 0;
-      color: #475569;
-      line-height: 1.45;
-    }
-    .lesson-section.highlight-error {
-      border: 1.5px solid #f59e0b;
-      background: #fffbeb;
-    }
-    .lesson-section.highlight-error h4 {
-      color: #b45309;
-    }
-    .lesson-section.homework {
-      border: 1.5px solid #3b82f6;
-      background: #eff6ff;
-    }
-    .hw-deadline {
-      margin-top: 6px;
-      font-size: 11.5px;
-      font-weight: 700;
-      color: #1d4ed8;
-      display: inline-block;
-    }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        font-size: 15px;
+      }
 
-    /* COLUMN 2: STUDY MODE CHAT INTERFACE */
-    .col-chat {
-      background: #ffffff;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      min-height: 0;
-      border-right: 1px solid var(--line);
-      overflow: hidden;
-      position: relative;
-    }
-    .chat-header {
-      flex-shrink: 0;
-      padding: 14px 20px;
-      border-bottom: 1px solid var(--line);
-      background: #ffffff;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 5;
-    }
-    .chat-assistant-info {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .ai-avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, #2563eb, #7c3aed);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 16px;
-      box-shadow: 0 2px 6px rgba(37,99,235,0.2);
-    }
-    .chat-title-wrap h3 {
-      margin: 0;
-      font-size: 15px;
-      font-weight: 700;
-      color: #0f172a;
-    }
-    .chat-title-wrap p {
-      margin: 0;
-      font-size: 12px;
-      color: var(--muted);
-    }
+      .brand-tag {
+        background: #3b82f6;
+        color: #fff;
+        padding: 2px 7px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+      }
 
-    .chat-stream {
-      flex: 1 1 0%;
-      min-height: 0;
-      overflow-y: auto;
-      overscroll-behavior: contain;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      background: #fafaf9;
-    }
+      .nav-meta {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-size: 12.5px;
+      }
 
-    .message {
-      display: flex;
-      flex-direction: column;
-      max-width: 88%;
-      animation: fadeIn 0.2s ease;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .message.user {
-      align-self: flex-end;
-      align-items: flex-end;
-    }
-    .message.bot {
-      align-self: flex-start;
-      align-items: flex-start;
-    }
-    .bubble {
-      padding: 12px 16px;
-      border-radius: 14px;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-    .message.user .bubble {
-      background: #2563eb;
-      color: #ffffff;
-      border-bottom-right-radius: 3px;
-    }
-    .message.bot .bubble {
-      background: #ffffff;
-      color: #0f172a;
-      border: 1px solid #e2e8f0;
-      border-bottom-left-radius: 3px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-    }
-    .bot-name-label {
-      font-size: 11.5px;
-      font-weight: 700;
-      color: var(--muted);
-      margin-bottom: 5px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
+      .clock-pill {
+        background: #1e293b;
+        padding: 4px 10px;
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: #cbd5e1;
+        border: 1px solid #334155;
+      }
 
-    /* CARD CHAT STYLES */
-    .source-box {
-      margin-top: 10px;
-      background: #f8fafc;
-      border: 1px solid #cbd5e1;
-      border-left: 3.5px solid var(--primary);
-      border-radius: 8px;
-      padding: 10px 12px;
-      font-size: 13px;
-      color: #334155;
-    }
-    .source-title {
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 3px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .alert-banner {
-      margin-top: 10px;
-      padding: 10px 13px;
-      border-radius: 8px;
-      font-size: 13px;
-      line-height: 1.45;
-    }
-    .alert-banner.warn {
-      background: var(--warning-subtle);
-      border: 1px solid #fde68a;
-      color: #92400e;
-    }
-    .alert-banner.danger {
-      background: var(--danger-subtle);
-      border: 1px solid #fecaca;
-      color: #991b1b;
-    }
-    .alert-banner.info {
-      background: var(--primary-subtle);
-      border: 1px solid #bfdbfe;
-      color: #1e40af;
-    }
-    .actions-cluster {
-      display: flex;
-      gap: 8px;
-      margin-top: 12px;
-      flex-wrap: wrap;
-    }
-    .act-btn {
-      border: 1px solid #cbd5e1;
-      background: #ffffff;
-      padding: 7px 12px;
-      border-radius: 7px;
-      font-size: 12.5px;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      color: #1e293b;
-      transition: all 0.15s;
-    }
-    .act-btn:hover {
-      background: #f8fafc;
-      border-color: #94a3b8;
-    }
-    .act-btn.primary {
-      background: #2563eb;
-      color: #fff;
-      border-color: #2563eb;
-    }
-    .act-btn.primary:hover { background: #1d4ed8; }
-    .act-btn.warning {
-      background: #f59e0b;
-      color: #fff;
-      border-color: #f59e0b;
-    }
-    .act-btn.warning:hover { background: #d97706; }
-    .act-btn.disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      background: #f1f5f9;
-      color: #94a3b8;
-      border-color: #cbd5e1;
-    }
+      .clock-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #f59e0b;
+        animation: pulse 2s infinite;
+      }
 
-    /* CHAT INPUT AREA (FIXED PERMANENTLY AT BOTTOM) */
-    .chat-composer {
-      flex-shrink: 0;
-      padding: 12px 18px;
-      background: #ffffff;
-      border-top: 1px solid var(--line);
-      display: flex;
-      gap: 10px;
-      position: relative;
-      z-index: 15;
-      box-shadow: 0 -3px 12px rgba(0,0,0,0.04);
-    }
-    .composer-input {
-      flex: 1;
-      border: 1.5px solid var(--line);
-      border-radius: 9px;
-      padding: 10px 14px;
-      font-size: 13.5px;
-      outline: none;
-      transition: border-color 0.15s, box-shadow 0.15s;
-    }
-    .composer-input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
-    }
-    .composer-btn {
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      border-radius: 9px;
-      padding: 10px 20px;
-      font-size: 13.5px;
-      font-weight: 700;
-      cursor: pointer;
-      flex-shrink: 0;
-      transition: background 0.15s;
-    }
-    .composer-btn:hover { background: var(--primary-hover); }
+      @keyframes pulse {
+        0% {
+          opacity: 0.4;
+        }
 
-    /* COLUMN 3: LIVE RUBRIC & HAX INSPECTOR */
-    .col-analysis {
-      background: #ffffff;
-      height: 100%;
-      min-height: 0;
-      overflow-y: auto;
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
+        50% {
+          opacity: 1;
+        }
 
-    /* SLEEK SCROLLBARS */
-    .chat-stream::-webkit-scrollbar,
-    .col-content::-webkit-scrollbar,
-    .col-analysis::-webkit-scrollbar {
-      width: 6px;
-    }
-    .chat-stream::-webkit-scrollbar-track,
-    .col-content::-webkit-scrollbar-track,
-    .col-analysis::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    .chat-stream::-webkit-scrollbar-thumb,
-    .col-content::-webkit-scrollbar-thumb,
-    .col-analysis::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
-      border-radius: 999px;
-    }
-    .chat-stream::-webkit-scrollbar-thumb:hover,
-    .col-content::-webkit-scrollbar-thumb:hover,
-    .col-analysis::-webkit-scrollbar-thumb:hover {
-      background: #94a3b8;
-    }
-    .inspector-card {
-      background: #f8fafc;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 14px;
-    }
-    .inspector-card h4 {
-      margin: 0 0 10px;
-      font-size: 13.5px;
-      font-weight: 700;
-      color: #0f172a;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .hax-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: var(--badge-num);
-      color: #fff;
-      font-size: 11px;
-      font-weight: 800;
-      flex-shrink: 0;
-    }
-    .hax-item {
-      display: flex;
-      gap: 8px;
-      font-size: 12.5px;
-      margin-bottom: 9px;
-      line-height: 1.4;
-    }
-    .hax-item strong { color: #1e293b; }
+        100% {
+          opacity: 0.4;
+        }
+      }
 
-    /* TOOL MATRIX MINI TABLE */
-    .mini-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 12px;
-    }
-    .mini-table th, .mini-table td {
-      padding: 6px 4px;
-      border-bottom: 1px solid var(--line);
-      text-align: left;
-    }
-    .mini-table th { color: var(--muted); font-weight: 600; }
-    .tag-auto {
-      background: #dcfce7;
-      color: #15803d;
-      padding: 2px 5px;
-      border-radius: 4px;
-      font-weight: 700;
-    }
-    .tag-review {
-      background: #fef3c7;
-      color: #b45309;
-      padding: 2px 5px;
-      border-radius: 4px;
-      font-weight: 700;
-    }
-    .tag-blocked {
-      background: #fee2e2;
-      color: #b91c1c;
-      padding: 2px 5px;
-      border-radius: 4px;
-      font-weight: 700;
-    }
+      .ta-status {
+        background: rgba(239, 68, 68, 0.15);
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        color: #fca5a5;
+        padding: 3px 10px;
+        border-radius: 999px;
+        font-weight: 600;
+      }
 
-    /* HIDE ANNOTATIONS TOGGLE */
-    .hide-annotations .hax-badge {
-      display: none !important;
-    }
+      /* TOOLBAR CONTROL */
+      .control-bar {
+        flex-shrink: 0;
+        background: #ffffff;
+        border-bottom: 1px solid var(--line);
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+        z-index: 20;
+      }
+
+      .scenario-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .scenario-label {
+        font-size: 12.5px;
+        font-weight: 700;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-right: 4px;
+      }
+
+      .btn-scenario {
+        border: 1.5px solid var(--line);
+        background: #fff;
+        color: var(--ink-light);
+        padding: 6px 13px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .btn-scenario:hover {
+        background: #f1f5f9;
+        border-color: #cbd5e1;
+      }
+
+      .btn-scenario.active {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+        box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+      }
+
+      .toggle-annotations {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--ink-light);
+        cursor: pointer;
+        user-select: none;
+      }
+
+      /* MAIN APP WORKSPACE (3-COLUMN LAYOUT) */
+      .workspace {
+        flex: 1 1 0%;
+        min-height: 0;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 320px minmax(420px, 1fr) 360px;
+        overflow: hidden;
+      }
+
+      @media (max-width: 1200px) {
+        .workspace {
+          grid-template-columns: 280px 1fr;
+        }
+
+        .col-analysis {
+          display: none;
+        }
+      }
+
+      @media (max-width: 800px) {
+        .workspace {
+          grid-template-columns: 1fr;
+        }
+
+        .col-content {
+          display: none;
+        }
+      }
+
+      /* COLUMN 1: COURSE TEXT VIEWER */
+      .col-content {
+        background: #ffffff;
+        border-right: 1px solid var(--line);
+        height: 100%;
+        min-height: 0;
+        overflow-y: auto;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .course-header-tag {
+        font-size: 11px;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--primary);
+        letter-spacing: 0.5px;
+      }
+
+      .course-title {
+        font-size: 17px;
+        font-weight: 800;
+        margin: 4px 0 12px;
+        color: #0f172a;
+      }
+
+      .lesson-section {
+        background: #f8fafc;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 12px 14px;
+        font-size: 13px;
+      }
+
+      .lesson-section h4 {
+        margin: 0 0 6px;
+        font-size: 13.5px;
+        font-weight: 700;
+        color: #1e293b;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .section-badge {
+        font-size: 10.5px;
+        background: #e2e8f0;
+        padding: 1px 6px;
+        border-radius: 4px;
+        color: #475569;
+      }
+
+      .lesson-section p {
+        margin: 0;
+        color: #475569;
+        line-height: 1.45;
+      }
+
+      .lesson-section.highlight-error {
+        border: 1.5px solid #f59e0b;
+        background: #fffbeb;
+      }
+
+      .lesson-section.highlight-error h4 {
+        color: #b45309;
+      }
+
+      .lesson-section.homework {
+        border: 1.5px solid #3b82f6;
+        background: #eff6ff;
+      }
+
+      .hw-deadline {
+        margin-top: 6px;
+        font-size: 11.5px;
+        font-weight: 700;
+        color: #1d4ed8;
+        display: inline-block;
+      }
+
+      /* COLUMN 2: STUDY MODE CHAT INTERFACE */
+      .col-chat {
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        min-height: 0;
+        border-right: 1px solid var(--line);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .chat-header {
+        flex-shrink: 0;
+        padding: 14px 20px;
+        border-bottom: 1px solid var(--line);
+        background: #ffffff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 5;
+      }
+
+      .chat-assistant-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .ai-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #2563eb, #7c3aed);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 16px;
+        box-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);
+      }
+
+      .chat-title-wrap h3 {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 700;
+        color: #0f172a;
+      }
+
+      .chat-title-wrap p {
+        margin: 0;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .chat-stream {
+        flex: 1 1 0%;
+        min-height: 0;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        background: #fafaf9;
+      }
+
+      .message {
+        display: flex;
+        flex-direction: column;
+        max-width: 88%;
+        animation: fadeIn 0.2s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(4px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .message.user {
+        align-self: flex-end;
+        align-items: flex-end;
+      }
+
+      .message.bot {
+        align-self: flex-start;
+        align-items: flex-start;
+      }
+
+      .bubble {
+        padding: 12px 16px;
+        border-radius: 14px;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .message.user .bubble {
+        background: #2563eb;
+        color: #ffffff;
+        border-bottom-right-radius: 3px;
+      }
+
+      .message.bot .bubble {
+        background: #ffffff;
+        color: #0f172a;
+        border: 1px solid #e2e8f0;
+        border-bottom-left-radius: 3px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+      }
+
+      .bot-name-label {
+        font-size: 11.5px;
+        font-weight: 700;
+        color: var(--muted);
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      /* CARD CHAT STYLES */
+      .source-box {
+        margin-top: 10px;
+        background: #f8fafc;
+        border: 1px solid #cbd5e1;
+        border-left: 3.5px solid var(--primary);
+        border-radius: 8px;
+        padding: 10px 12px;
+        font-size: 13px;
+        color: #334155;
+      }
+
+      .source-title {
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 3px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .alert-banner {
+        margin-top: 10px;
+        padding: 10px 13px;
+        border-radius: 8px;
+        font-size: 13px;
+        line-height: 1.45;
+      }
+
+      .alert-banner.warn {
+        background: var(--warning-subtle);
+        border: 1px solid #fde68a;
+        color: #92400e;
+      }
+
+      .alert-banner.danger {
+        background: var(--danger-subtle);
+        border: 1px solid #fecaca;
+        color: #991b1b;
+      }
+
+      .alert-banner.info {
+        background: var(--primary-subtle);
+        border: 1px solid #bfdbfe;
+        color: #1e40af;
+      }
+
+      .actions-cluster {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+        flex-wrap: wrap;
+      }
+
+      .act-btn {
+        border: 1px solid #cbd5e1;
+        background: #ffffff;
+        padding: 7px 12px;
+        border-radius: 7px;
+        font-size: 12.5px;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        color: #1e293b;
+        transition: all 0.15s;
+      }
+
+      .act-btn:hover {
+        background: #f8fafc;
+        border-color: #94a3b8;
+      }
+
+      .act-btn.primary {
+        background: #2563eb;
+        color: #fff;
+        border-color: #2563eb;
+      }
+
+      .act-btn.primary:hover {
+        background: #1d4ed8;
+      }
+
+      .act-btn.warning {
+        background: #f59e0b;
+        color: #fff;
+        border-color: #f59e0b;
+      }
+
+      .act-btn.warning:hover {
+        background: #d97706;
+      }
+
+      .act-btn.disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        background: #f1f5f9;
+        color: #94a3b8;
+        border-color: #cbd5e1;
+      }
+
+      /* CHAT INPUT AREA (FIXED PERMANENTLY AT BOTTOM) */
+      .chat-composer {
+        flex-shrink: 0;
+        padding: 12px 18px;
+        background: #ffffff;
+        border-top: 1px solid var(--line);
+        display: flex;
+        gap: 10px;
+        position: relative;
+        z-index: 15;
+        box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.04);
+      }
+
+      .composer-input {
+        flex: 1;
+        border: 1.5px solid var(--line);
+        border-radius: 9px;
+        padding: 10px 14px;
+        font-size: 13.5px;
+        outline: none;
+        transition: border-color 0.15s, box-shadow 0.15s;
+      }
+
+      .composer-input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      }
+
+      .composer-btn {
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        border-radius: 9px;
+        padding: 10px 20px;
+        font-size: 13.5px;
+        font-weight: 700;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: background 0.15s;
+      }
+
+      .composer-btn:hover {
+        background: var(--primary-hover);
+      }
+
+      /* COLUMN 3: LIVE RUBRIC & HAX INSPECTOR */
+      .col-analysis {
+        background: #ffffff;
+        height: 100%;
+        min-height: 0;
+        overflow-y: auto;
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      /* SLEEK SCROLLBARS */
+      .chat-stream::-webkit-scrollbar,
+      .col-content::-webkit-scrollbar,
+      .col-analysis::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .chat-stream::-webkit-scrollbar-track,
+      .col-content::-webkit-scrollbar-track,
+      .col-analysis::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .chat-stream::-webkit-scrollbar-thumb,
+      .col-content::-webkit-scrollbar-thumb,
+      .col-analysis::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 999px;
+      }
+
+      .chat-stream::-webkit-scrollbar-thumb:hover,
+      .col-content::-webkit-scrollbar-thumb:hover,
+      .col-analysis::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+
+      .inspector-card {
+        background: #f8fafc;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 14px;
+      }
+
+      .inspector-card h4 {
+        margin: 0 0 10px;
+        font-size: 13.5px;
+        font-weight: 700;
+        color: #0f172a;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .hax-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--badge-num);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 800;
+        flex-shrink: 0;
+      }
+
+      .hax-item {
+        display: flex;
+        gap: 8px;
+        font-size: 12.5px;
+        margin-bottom: 9px;
+        line-height: 1.4;
+      }
+
+      .hax-item strong {
+        color: #1e293b;
+      }
+
+      /* TOOL MATRIX MINI TABLE */
+      .mini-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+      }
+
+      .mini-table th,
+      .mini-table td {
+        padding: 6px 4px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+
+      .mini-table th {
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      .tag-auto {
+        background: #dcfce7;
+        color: #15803d;
+        padding: 2px 5px;
+        border-radius: 4px;
+        font-weight: 700;
+      }
+
+      .tag-review {
+        background: #fef3c7;
+        color: #b45309;
+        padding: 2px 5px;
+        border-radius: 4px;
+        font-weight: 700;
+      }
+
+      .tag-blocked {
+        background: #fee2e2;
+        color: #b91c1c;
+        padding: 2px 5px;
+        border-radius: 4px;
+        font-weight: 700;
+      }
+
+      /* HIDE ANNOTATIONS TOGGLE */
+      .hide-annotations .hax-badge {
+        display: none !important;
+      }
   </style>
 </head>
+
 <body>
 
   <!-- 1. TOP GLOBAL NAVBAR -->
@@ -613,7 +724,8 @@
       <span>Học phần: Nhập môn Phân tích Dữ liệu</span>
     </div>
     <div class="nav-meta">
-      <button id="apiToggleBtn" onclick="toggleApiMode()" style="background:#1e293b; color:#38bdf8; border:1px solid #0284c7; border-radius:999px; padding:4px 12px; font-size:12px; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:5px;">
+      <button id="apiToggleBtn" onclick="toggleApiMode()"
+        style="background:#1e293b; color:#38bdf8; border:1px solid #0284c7; border-radius:999px; padding:4px 12px; font-size:12px; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:5px;">
         <span style="width:7px; height:7px; border-radius:50%; background:#22c55e;"></span>
         <span>⚡ AI Thật: OpenRouter GPT-4o-mini (BẬT)</span>
       </button>
@@ -664,29 +776,36 @@
 
       <div class="lesson-section">
         <h4>§3.1 Trung bình cộng <span class="section-badge">Đọc được</span></h4>
-        <p>Tổng các giá trị chia cho số lượng phần tử. Trung bình cộng rất nhạy và bị kéo lệch mạnh bởi các giá trị ngoại lai (outliers).</p>
+        <p>Tổng các giá trị chia cho số lượng phần tử. Trung bình cộng rất nhạy và bị kéo lệch mạnh bởi các giá trị
+          ngoại lai (outliers).</p>
       </div>
 
       <div class="lesson-section">
         <h4>§3.2 Trung vị <span class="section-badge">Đọc được</span></h4>
-        <p>Giá trị đứng chính giữa khi sắp xếp dữ liệu tăng dần. Nếu n chẵn, lấy trung bình của 2 số ở giữa. Ít bị ảnh hưởng bởi ngoại lai, thích hợp cho dữ liệu lệch như thu nhập, giá nhà.</p>
+        <p>Giá trị đứng chính giữa khi sắp xếp dữ liệu tăng dần. Nếu n chẵn, lấy trung bình của 2 số ở giữa. Ít bị ảnh
+          hưởng bởi ngoại lai, thích hợp cho dữ liệu lệch như thu nhập, giá nhà.</p>
       </div>
 
       <div class="lesson-section highlight-error">
-        <h4>§3.3 Phương sai & Độ lệch chuẩn <span class="section-badge" style="background:#fde68a; color:#92400e;">⚠️ Điểm nghi vấn</span></h4>
-        <p>Phương sai đo mức độ phân tán quanh trung bình. Độ lệch chuẩn là căn bậc hai của phương sai, cùng đơn vị với dữ liệu. <em>"Vì là căn bậc hai, độ lệch chuẩn luôn nhỏ hơn phương sai."</em> (Phát biểu sai khi 0 &lt; v &lt; 1).</p>
+        <h4>§3.3 Phương sai & Độ lệch chuẩn <span class="section-badge" style="background:#fde68a; color:#92400e;">⚠️
+            Điểm nghi vấn</span></h4>
+        <p>Phương sai đo mức độ phân tán quanh trung bình. Độ lệch chuẩn là căn bậc hai của phương sai, cùng đơn vị với
+          dữ liệu. <em>"Vì là căn bậc hai, độ lệch chuẩn luôn nhỏ hơn phương sai."</em> (Phát biểu sai khi 0 &lt; v &lt;
+          1).</p>
       </div>
 
       <div class="lesson-section">
         <h4>§3.4 Giá trị ngoại lai <span class="section-badge">Đọc được</span></h4>
-        <p>Giá trị khác biệt hẳn so với phần lớn dữ liệu. Cần xác minh xem đó là lỗi nhập liệu hay bản chất dữ liệu thật trước khi loại bỏ.</p>
+        <p>Giá trị khác biệt hẳn so với phần lớn dữ liệu. Cần xác minh xem đó là lỗi nhập liệu hay bản chất dữ liệu thật
+          trước khi loại bỏ.</p>
       </div>
 
       <div class="lesson-section homework">
-        <h4>§3.5 Bài tập 3 (Tính điểm) <span class="section-badge" style="background:#bfdbfe; color:#1e40af;">Đang mở</span></h4>
+        <h4>§3.5 Bài tập 3 (Tính điểm) <span class="section-badge" style="background:#bfdbfe; color:#1e40af;">Đang
+            mở</span></h4>
         <p>Dữ liệu lương tháng 8 nhân viên: <code>9, 10, 10, 11, 12, 12, 13, 45</code> triệu đồng.<br>
-        (a) Tính trung bình và trung vị.<br>
-        (b) Số nào mô tả "lương điển hình" tốt hơn? Vì sao?</p>
+          (a) Tính trung bình và trung vị.<br>
+          (b) Số nào mô tả "lương điển hình" tốt hơn? Vì sao?</p>
         <div class="hw-deadline">⏳ Hạn nộp: 23:59 ngày 13/11/2026 (Còn ~24h)</div>
       </div>
     </aside>
@@ -701,7 +820,8 @@
             <p>Hỗ trợ tư duy phương pháp Socratic · Không giải hộ bài tập</p>
           </div>
         </div>
-        <div style="font-size:12px; font-weight:700; color:#16a34a; background:#dcfce7; padding:3px 9px; border-radius:999px;">
+        <div
+          style="font-size:12px; font-weight:700; color:#16a34a; background:#dcfce7; padding:3px 9px; border-radius:999px;">
           Đang hoạt động (24/7)
         </div>
       </div>
@@ -713,7 +833,9 @@
 
       <!-- COMPOSER -->
       <div class="chat-composer">
-        <input type="text" class="composer-input" id="userInput" placeholder="Gõ câu hỏi bất kỳ (hoặc bấm chọn kịch bản ở trên)..." onkeydown="if(event.key==='Enter') sendUserMessage()">
+        <input type="text" class="composer-input" id="userInput"
+          placeholder="Gõ câu hỏi bất kỳ (hoặc bấm chọn kịch bản ở trên)..."
+          onkeydown="if(event.key==='Enter') sendUserMessage()">
         <button class="composer-btn" onclick="sendUserMessage()">Gửi tin</button>
       </div>
     </main>
@@ -724,63 +846,61 @@
         <h4>Nguyên tắc HAX / PAIR trỏ vào UI</h4>
         <div class="hax-item">
           <span class="hax-badge">1</span>
-          <div><strong>HAX G1/G2 (Minh bạch AI & Giới hạn):</strong> Header ghi rõ Study Mode, báo trước TA offline để người học không chờ đợi trong đêm.</div>
+          <div><strong>HAX G1/G2 (Minh bạch AI & Giới hạn):</strong> Header ghi rõ Study Mode, báo trước TA offline để
+            người học không chờ đợi trong đêm.</div>
         </div>
         <div class="hax-item">
           <span class="hax-badge">2</span>
-          <div><strong>HAX G11 (Trích dẫn có căn cứ):</strong> Thẻ nguồn dẫn chính xác mục §3.1 – §3.3 có thật, không bịa slide hay bài chưa mở.</div>
+          <div><strong>HAX G11 (Trích dẫn có căn cứ):</strong> Thẻ nguồn dẫn chính xác mục §3.1 – §3.3 có thật, không
+            bịa slide hay bài chưa mở.</div>
         </div>
         <div class="hax-item">
           <span class="hax-badge">3</span>
           <div><strong>HAX G10 (Thu hẹp khi nghi ngờ):</strong> Khi phát hiện §3.3 mâu thuẫn toán học, AI khoanh vùng $0 &lt; v &lt; 1$ kèm ví dụ độc lập.</div>
         </div>
-        <div class="hax-item">
-          <span class="hax-badge">4</span>
-          <div><strong>Mức tự chủ CẦN NGƯỜI DUYỆT:</strong> Nút đăng FAQ bị khóa; kích hoạt quy trình tạo ticket gửi Giảng viên duyệt lúc 08:00 sáng.</div>
-        </div>
-        <div class="hax-item">
-          <span class="hax-badge">5</span>
-          <div><strong>HAX G9 (Lối thoát an toàn):</strong> Nút gửi lời nhắn cho TA có cam kết mốc thời gian rõ ràng (sau 08:00 sáng mai).</div>
-        </div>
-      </div>
 
-      <div class="inspector-card">
-        <h4>Ma trận Mức tự chủ 4 Tool (§4)</h4>
-        <table class="mini-table">
-          <thead>
-            <tr><th>Công cụ</th><th>Mức</th><th>Kiểm soát Cost-of-Error</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>tra_cuu_tai_lieu</code></td>
-              <td><span class="tag-auto">Tự làm</span></td>
-              <td>Chỉ đọc Buổi 1–3, không gây hại.</td>
-            </tr>
-            <tr>
-              <td><code>goi_y_bai_tap</code></td>
-              <td><span class="tag-auto">Có rào chắn</span></td>
-              <td>Khóa đáp số bài 3 đang mở.</td>
-            </tr>
-            <tr>
-              <td><code>chuyen_TA</code></td>
-              <td><span class="tag-auto">Tự làm</span></td>
-              <td>Lưu hàng đợi + hẹn sau 08:00.</td>
-            </tr>
-            <tr>
-              <td><code>dang_FAQ</code></td>
-              <td><span class="tag-review">Cần duyệt</span></td>
-              <td>Giảng viên duyệt trước khi đăng.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <div class="inspector-card">
+          <h4>Ma trận Mức tự chủ 4 Tool (§4)</h4>
+          <table class="mini-table">
+            <thead>
+              <tr>
+                <th>Công cụ</th>
+                <th>Mức</th>
+                <th>Kiểm soát Cost-of-Error</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>tra_cuu_tai_lieu</code></td>
+                <td><span class="tag-auto">Tự làm</span></td>
+                <td>Chỉ đọc Buổi 1–3, không gây hại.</td>
+              </tr>
+              <tr>
+                <td><code>goi_y_bai_tap</code></td>
+                <td><span class="tag-auto">Có rào chắn</span></td>
+                <td>Khóa đáp số bài 3 đang mở.</td>
+              </tr>
+              <tr>
+                <td><code>chuyen_TA</code></td>
+                <td><span class="tag-auto">Tự làm</span></td>
+                <td>Lưu hàng đợi + hẹn sau 08:00.</td>
+              </tr>
+              <tr>
+                <td><code>dang_FAQ</code></td>
+                <td><span class="tag-review">Cần duyệt</span></td>
+                <td>Giảng viên duyệt trước khi đăng.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-      <div class="inspector-card" style="background:#faf5ff; border-color:#e9d5ff;">
-        <h4 style="color:#6b21a8;">Lời hứa sản phẩm (§4.4)</h4>
-        <p style="margin:0; font-size:12px; color:#581c87; line-height:1.45;">
-          <em>"Study Mode đồng hành tháo gỡ tư duy phương pháp 24/7; bài tập đánh giá và đính chính giáo trình thuộc thẩm quyền Giảng viên & TA."</em>
-        </p>
-      </div>
+        <div class="inspector-card" style="background:#faf5ff; border-color:#e9d5ff;">
+          <h4 style="color:#6b21a8;">Lời hứa sản phẩm (§4.4)</h4>
+          <p style="margin:0; font-size:12px; color:#581c87; line-height:1.45;">
+            <em>"Study Mode đồng hành tháo gỡ tư duy phương pháp 24/7; bài tập đánh giá và đính chính giáo trình thuộc
+              thẩm quyền Giảng viên & TA."</em>
+          </p>
+        </div>
     </aside>
 
   </div>
@@ -1161,4 +1281,6 @@ RÀO CHẮN BẮT BUỘC:
     switchScenario('k2', document.querySelector('.btn-scenario.active'));
   </script>
 </body>
+
 </html>
+}
