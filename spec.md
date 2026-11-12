@@ -7,8 +7,8 @@ Track: T2
 
 | Họ và Tên     | Mã Học Viên | Việc đã làm                                          |
 | ------------- | ----------- | ---------------------------------------------------- |
-| Trần Đức Mạnh | 2A202603615 | §1: Lát cắt & phạm vi; §2: Phân tích kịch bản rủi ro; §6: Tiêu chí đánh giá. |
-| Lê Anh Quân   | 2A202603576 | §3, §4 – Thiết kế UX và mức tự chủ                   |
+| Lê Anh Quân   | 2A202603576 | §1: Lát cắt & phạm vi; §2: Phân tích kịch bản rủi ro; §6: Tiêu chí đánh giá. |
+| Trần Đức Mạnh | 2A202603615 | §3, §4 – Thiết kế UX và mức tự chủ                   |
 | Kim Đức Thắng | 2A202603702 | §5 – Prototype, kiểm thử và hỗ trợ demo              |
 
 ## §1. Lát cắt & phạm vi
@@ -108,13 +108,13 @@ Bảng sau là chỗ trống để ghi tool khó xếp nhất sau khi từng ng�
 
 | Thành viên | Tool khó xếp nhất | Mức đề xuất | Lý do |
 |---|---|---|---|
-| Trần Đức Mạnh (Người 1) | `dang_FAQ` | **Cần Giảng viên duyệt** (hoặc Cấm) | Rủi ro phát tán diện rộng cả lớp ở ca S09; một khi kiến thức sai đăng lên bảng tin chung thì tổn hại uy tín sư phạm rất khó đảo ngược. |
-| Lê Anh Quân (Người 2) | `goi_y_bai_tap` | **Tự làm có điều kiện ràng buộc** (Guarded Autonomy) | Cốt lõi của Study mode lúc 23:15 đêm muộn: cấm thì trợ lý vô dụng, thả tự do thì lộ bài 3 (S01, S02). Mức nào cũng có giá đắt, phải cân bằng giữa tính hữu dụng và liêm chính học thuật. |
+| Lê Anh Quân (Người 1) | `dang_FAQ` | **Cần Giảng viên duyệt** (hoặc Cấm) | Rủi ro phát tán diện rộng cả lớp ở ca S09; một khi kiến thức sai đăng lên bảng tin chung thì tổn hại uy tín sư phạm rất khó đảo ngược. |
+| Trần Đức Mạnh (Người 2) | `goi_y_bai_tap` | **Tự làm có điều kiện ràng buộc** (Guarded Autonomy) | Cốt lõi của Study mode lúc 23:15 đêm muộn: cấm thì trợ lý vô dụng, thả tự do thì lộ bài 3 (S01, S02). Mức nào cũng có giá đắt, phải cân bằng giữa tính hữu dụng và liêm chính học thuật. |
 | Kim Đức Thắng (Người 3) | `chuyen_TA` | **Cần học viên duyệt** (kèm Quản lý kỳ vọng) | Tránh spam hòm thư TA lúc nửa đêm (S08), đồng thời phải có giao diện quản lý kỳ vọng thời gian minh bạch để học viên không ảo tưởng TA sẽ trả lời ngay trong đêm (S07). |
 
 ## §3. Khi AI sai (chặng 3)
 
-*Thành viên phụ trách: Lê Anh Quân (Mã học viên: 2A202603576)*
+*Thành viên phụ trách: Trần Đức Mạnh (Mã học viên: 2A202603615)*
 
 Thiết kế chi tiết hành vi tương tác, thông điệp phản hồi, giao diện cảnh báo và cơ chế phục hồi cho hai kịch bản rủi ro đắt nhất đã được chốt tại §2:
 - **Ca A (S01 kèm biến thể xác nhận S02):** Học viên xin giải hộ trọn gói hoặc xin xác nhận đáp số Bài tập 3 đang mở lúc 23:15 đêm muộn.
@@ -257,7 +257,7 @@ Thiết kế chi tiết hành vi tương tác, thông điệp phản hồi, giao
 
 ## §4. Mức tự chủ (chặng 4)
 
-*Thành viên phụ trách: Lê Anh Quân (Mã học viên: 2A202603576)*
+*Thành viên phụ trách: Trần Đức Mạnh (Mã học viên: 2A202603615)*
 
 ### 4.1. Bảng phân định mức tự chủ cho toàn bộ công cụ
 
@@ -310,14 +310,14 @@ Trong buổi thảo luận nội bộ để chốt mức tự chủ, cả ba th�
 
 | Thành viên | Tool khó xếp nhất | Mức đề xuất | Lý do và cái giá phải trả của mỗi phương án |
 |---|---|---|---|
-| **Trần Đức Mạnh**<br>*(Phụ trách Rủi ro & Phạm vi)* | `dang_FAQ` | **CẤM** AI đụng tới công cụ này | Bán kính sát thương của ca S09 là toàn bộ lớp học. Nếu cho AI dùng tool này, dù có rào chắn thế nào thì rủi ro phát tán lỗi giáo trình §3.3 vẫn có thể xảy ra. Thà cấm tiệt để giảng viên tự tay làm FAQ còn hơn để AI làm sai làm hỏng niềm tin cả khoá học. |
-| **Lê Anh Quân**<br>*(Phụ trách UX & Mức tự chủ)* | `goi_y_bai_tap` | **TỰ LÀM CÓ RÀNG BUỘC** (Guarded Autonomy) | Đây là linh hồn của chế độ Study Mode lúc 23:15 đêm. Nếu bắt TA duyệt thì học viên phải đợi 9 tiếng (đến 08:00 hôm sau), tính năng học đêm coi như chết. Nhưng nếu thả tự do thì dính bẫy S01/S02 lộ đáp án bài 3 ngay. Đây là tool giằng xé nhất giữa tính hữu dụng (usability) và an toàn học thuật (academic integrity). |
+| **Lê Anh Quân**<br>*(Phụ trách Rủi ro & Phạm vi)* | `dang_FAQ` | **CẤM** AI đụng tới công cụ này | Bán kính sát thương của ca S09 là toàn bộ lớp học. Nếu cho AI dùng tool này, dù có rào chắn thế nào thì rủi ro phát tán lỗi giáo trình §3.3 vẫn có thể xảy ra. Thà cấm tiệt để giảng viên tự tay làm FAQ còn hơn để AI làm sai làm hỏng niềm tin cả khoá học. |
+| **Trần Đức Mạnh**<br>*(Phụ trách UX & Mức tự chủ)* | `goi_y_bai_tap` | **TỰ LÀM CÓ RÀNG BUỘC** (Guarded Autonomy) | Đây là linh hồn của chế độ Study Mode lúc 23:15 đêm. Nếu bắt TA duyệt thì học viên phải đợi 9 tiếng (đến 08:00 hôm sau), tính năng học đêm coi như chết. Nhưng nếu thả tự do thì dính bẫy S01/S02 lộ đáp án bài 3 ngay. Đây là tool giằng xé nhất giữa tính hữu dụng (usability) và an toàn học thuật (academic integrity). |
 | **Kim Đức Thắng**<br>*(Phụ trách Prototype & Kỹ thuật)* | `chuyen_TA` | **CẦN HỌC VIÊN DUYỆT** (kèm Quản lý kỳ vọng thời gian) | Thắng lo ngại về mặt kỹ thuật và tâm lý ở ca S07: Lúc 23:15 đêm học viên bấm chuyển TA, nếu không thiết kế khéo, học viên sẽ nghĩ TA đang online trực chat và ngồi đợi TA trả lời ngay trong đêm. Xếp mức này đòi hỏi phải có giao diện quản lý kỳ vọng thời gian cực kỳ chặt chẽ. |
 
 - **Nhóm đã chốt thế nào:**
   - Nhóm thống nhất **`goi_y_bai_tap` là tool khó xếp nhất** vì nó quyết định sự thành bại của toàn bộ bài toán lát cắt T2.
   - Để giải quyết bài toán tiến thoái lưỡng nan này, nhóm quyết định **không chọn hai cực đoan (không thả tự do và không cấm hoàn toàn)**. Thay vào đó, nhóm thiết lập cơ chế **Tự chủ có điều kiện (Guarded Autonomy)**: AI được tự do hỗ trợ phương pháp tư duy Socratic bước 1 dựa trên tài liệu §3.1/§3.2, nhưng bị khóa cứng tuyệt đối quyền sinh ra kết quả tính toán hay câu nhận xét bài tập.
-  - Đối với mối lo của Mạnh về `dang_FAQ`, nhóm giải quyết bằng cách **tách tool thành 2 bước riêng biệt**; đối với mối lo của Thắng về `chuyen_TA`, nhóm giải quyết bằng **cảnh báo thời gian trực minh bạch** trên popup xác nhận.
+  - Đối với mối lo của Quân về `dang_FAQ`, nhóm giải quyết bằng cách **tách tool thành 2 bước riêng biệt**; đối với mối lo của Thắng về `chuyen_TA`, nhóm giải quyết bằng **cảnh báo thời gian trực minh bạch** trên popup xác nhận.
 
 ---
 
@@ -362,6 +362,71 @@ Kiểm chứng bộ mức tự chủ vừa thiết lập trên 2 kịch bản đ
 
 ## §5. Prototype (chặng 5)
 
+*Thành viên phụ trách: Kim Đức Thắng (Mã học viên: 2A202603702)*
+
+### 5.1. Thông tin kỹ thuật & Khung triển khai
+- **Vị trí file mã nguồn:** Thư mục [`prototype/index.html`](prototype/index.html) trong repo chính thức của nhóm.
+- **Công nghệ xây dựng:** HTML5, CSS3 hiện đại, Vanilla JavaScript (không phụ thuộc vào bất kỳ thư viện bên ngoài, framework hay server backend nào). Chạy mượt mà, độc lập trên mọi trình duyệt web (Chrome, Edge, Firefox, Safari) chỉ bằng thao tác nhấp đúp file.
+- **Dữ liệu giả lập (Mocking):**
+  - Tích hợp sẵn bộ dữ liệu ngữ cảnh: Khóa học *Nhập môn Phân tích dữ liệu* (Buổi 3: Thống kê mô tả từ §3.1 đến §3.5).
+  - Trạng thái thời gian thực tế: 23:35 đêm muộn ngày 12/11/2026 (Bài tập 3 đang mở hạn nộp đến 23:59 ngày 13/11/2026; Trợ giảng TA ngoại tuyến ngoài khung giờ 08:00–22:00).
+- **Cơ chế tương tác kép (Dual Interaction Mode):**
+  1. *Thanh chuyển kịch bản nhanh (Scenario Toolbar):* Cho phép bấm chọn tức thì 4 kịch bản điển hình (Ca B đắt nhất — Lỗi §3.3; Ca A — Bài tập 3; Ca bình thường — Trung vị vs Trung bình; Ca lạ — Hỏi p-value Buổi 7).
+  2. *Ô chat thông minh (Live Chat Box):* Người dùng có thể tự do gõ bất kỳ câu hỏi nào bằng bàn phím; hệ thống nhúng bộ máy Rule-based AI Engine phân tích ngữ nghĩa và phản hồi chuẩn xác theo đúng rào chắn Guarded Autonomy đã thiết kế ở §3 và §4.
+- **Lời gọi AI thật:** Prototype chạy offline tự động để đảm bảo độ tin cậy tuyệt đối khi demo; không lưu trữ hay làm lộ API key trong mã nguồn nộp bài.
+
+---
+
+### 5.2. Đánh số các điểm chạm HAX/PAIR và Mức tự chủ trên Prototype
+
+Giao diện prototype được đánh số trực quan bằng các huy hiệu tròn màu cam **(1)** đến **(5)** để đối chiếu trực tiếp với Rubric R5:
+
+* **Số (1) — HAX G1/G2 & Nghĩa vụ Minh bạch AI:**
+  - *Vị trí trên màn hình:* Nằm ở Banner đầu trang và Header của hộp chat.
+  - *Thể hiện:* Hiển thị rõ danh tính `[Trợ lý học tập AI (Study Mode) — Chế độ gợi ý phương pháp, không giải bài hộ]`, tuân thủ Điều 11 khoản 1 Luật Trí tuệ nhân tạo số 134/2025/QH15.
+  - *Quản lý kỳ vọng:* Huy hiệu trạng thái trên cùng ghi rõ: `[TA Ngoại tuyến — Khung trực: 08:00 – 22:00]` để học viên không ảo tưởng TA sẽ trả lời ngay lúc nửa đêm.
+
+* **Số (2) — HAX G11 & PAIR Explainability (Trích dẫn căn cứ thực có):**
+  - *Vị trí trên màn hình:* Hộp trích dẫn màu trắng viền xanh (`source-box`) xuất hiện trong mỗi lượt AI phản hồi.
+  - *Thể hiện:* Dẫn chứng chuẩn xác từng câu chữ và mã mục có thật trong giáo trình (`§3.1 Trung bình cộng`, `§3.2 Trung vị`, `§3.3 Phương sai`). Tuyệt đối không viện dẫn tài liệu không tồn tại như "slide 12" hay "buổi 7".
+
+* **Số (3) — HAX G10 (Thu hẹp phạm vi khi nghi ngờ & Dữ liệu nguồn lỗi):**
+  - *Vị trí trên màn hình:* Khối thông báo viền vàng/đỏ (`warn-box`) khi gặp ca rủi ro K2 / S09.
+  - *Thể hiện:* Khi phát hiện câu chữ giáo trình §3.3 có mâu thuẫn toán học, AI thu hẹp phạm vi xuống trường hợp đặc biệt ($0 < v < 1$) và đưa ra thẻ chứng minh độc lập ($v = 0.25 \Rightarrow \sqrt{v} = 0.5 > 0.25$), không áp đặt kết luận sai.
+
+* **Số (4) — Mức tự chủ CẦN NGƯỜI DUYỆT (Staff Review Required):**
+  - *Vị trí trên màn hình:* Nút bấm màu vàng cam `[Gửi phiếu báo lỗi cho Giảng viên duyệt]` và trạng thái khóa của tính năng FAQ.
+  - *Thể hiện:* Tước bỏ hoàn toàn nút "Đăng lên FAQ" của AI và học viên; thay thế bằng luồng tạo phiếu đính chính gửi tới Dashboard của Giảng viên để con người phê duyệt trước khi công bố rộng rãi.
+
+* **Số (5) — HAX G9 / PAIR Graceful Fallback (Lối thoát chuyển người an toàn):**
+  - *Vị trí trên màn hình:* Nút bấm `[Để lại câu hỏi cho TA (hỗ trợ sau 08:00 sáng mai)]`.
+  - *Thể hiện:* Cho phép học viên gửi câu hỏi vào hàng đợi của TA lúc nửa đêm một cách an tâm, kèm thông báo xác nhận thời gian phục vụ rõ ràng.
+
+---
+
+### 5.3. Quyết định lựa chọn giao diện & Các phương án đã cân nhắc
+
+- **Phương án nhóm đã chọn:** Thiết kế dạng **Bảng điều khiển học tập tích hợp (Embedded Study Panel)** — hộp chat trượt nằm ngay bên cạnh giáo trình Buổi 3.
+- **Vì sao chọn:** Vì trong bối cảnh học tập sư phạm, việc đọc tài liệu và hỏi bài là hai hành vi diễn ra đồng thời. Giao diện tích hợp cho phép học viên vừa đọc định nghĩa ở khung bên trái, vừa nhận gợi ý phương pháp ở khung bên phải, tạo điều kiện thuận lợi nhất để đối chiếu căn cứ §3.1 – §3.5 (HAX G11).
+- **Các phương án đã cân nhắc và lý do loại:**
+  1. *Dạng Chatbot toàn màn hình (Full-screen Chat như ChatGPT thông thường):* Đã cân nhắc nhưng loại bỏ vì tách rời học viên khỏi bối cảnh bài học, làm học viên có xu hướng coi AI là "máy nhả đáp án" thay vì công cụ hỗ trợ đọc hiểu giáo trình.
+  2. *Dạng gợi ý điền tự động trong bài làm (Inline Ghost Text / Copilot):* Đã cân nhắc nhưng loại bỏ vì rủi ro cực cao: AI có thể tự động điền các con số phép tính của Bài tập 3 vào bài nộp của học viên, vi phạm nghiêm trọng tính liêm chính học thuật.
+
+---
+
+### 5.4. Kết quả kiểm thử thực tế trên Prototype (Chạy kiểm chứng E1, E2, E3)
+
+Thành viên 3 đã thực hiện chạy kiểm thử trực tiếp cả 4 ca trên `prototype/index.html`:
+
+| Ca kiểm thử | Thao tác thực hiện | Hành vi quan sát được trên màn hình | Kết quả đối chiếu với §6 |
+|---|---|---|---|
+| **Ca A (S01, S02) — Bài tập 3** | Bấm nút `Ca 1` hoặc gõ: *"giải hộ bài 3 lương bao nhiêu"* | Banner cảnh báo bài đang mở hiện lên; AI từ chối đưa số; hộp trích dẫn §3.1 và §3.2 hiện ra; có nút gợi ý bước 1 và nút gửi TA. Tuyệt đối không xuất hiện đáp số `16.5` hay `11.5`. | **E1: PASS**<br>**E3: PASS** |
+| **Ca B (S09) — Lỗi §3.3 & FAQ** | Bấm nút `Ca 2` hoặc gõ: *"đăng kết luận độ lệch luôn nhỏ hơn phương sai lên FAQ"* | Hộp cảnh báo màu vàng xuất hiện; hiển thị rõ phản ví dụ $0.25 \rightarrow 0.5$; không có nút đăng trực tiếp; có nút gửi phiếu duyệt cho Giảng viên. | **E2: PASS**<br>**E3: PASS** |
+| **Ca C (S10) — Phân biệt Trung vị / Trung bình** | Bấm nút `Ca bình thường` hoặc gõ: *"trung vị khác trung bình chỗ nào"* | Phản hồi xuất hiện tức thì sau 0.4 giây; trích dẫn chuẩn xác §3.1 và §3.2; giải thích sâu về tính nhạy cảm với giá trị ngoại lai; không bắt chờ TA. | **E3: PASS** |
+| **Ca Lạ — Hỏi kiến thức Buổi 7** | Bấm nút `Ca lạ` hoặc gõ: *"giải thích p-value buổi 7"* | AI từ chối giải thích chi tiết, thông báo Buổi 7 chưa phát hành tài liệu; khuyên tập trung vào Buổi 3. Không bịa đặt nội dung kiểm định. | **E3: PASS** |
+
+---
+
 ## §6. Tốt là gì (chặng 6 — nhẹ, bỏ được nếu thiếu giờ)
 
 ### Đúng ba tiêu chí nhị phân
@@ -397,4 +462,50 @@ Theo [04-rubric.md, R1/R2/R6](https://github.com/VinUni-AI20k/K5-L3-Day05-AI-Pro
 
 Rà soát biên tập: không thêm dữ liệu khoá học ngoài fixture; ví dụ phản biện toán được ghi rõ tự dựng; không tính/lộ đáp số Bài tập 3; không bịa tên/mã học viên, log tool hay điểm chấm. Chỉ tạo nội dung §1, §2, §6 trên khung mẫu; §3, §4, §5, §7 để trống cho người phụ trách, không triển khai hoặc sửa prototype.
 
-## §7. Demo
+## §7. Demo (chặng 7)
+
+*Thành viên phụ trách: Kim Đức Thắng (Mã học viên: 2A202603702)*
+
+### 7.1. Kịch bản phân vai Demo 3 phút của nhóm ToiLaAi
+
+Nhóm tổ chức khối trình bày 3 phút tinh gọn, mỗi thành viên đảm nhiệm đúng phần việc mang tên mình trong `spec.md` (đáp ứng trọn vẹn tiêu chí Rubric R7 và quy tắc Vibe-coding):
+
+* **Phút 1 — Lê Anh Quân (Trình bày Lát cắt, Bối cảnh & Kịch bản rủi ro §1, §2):**
+  * *Mở đầu:* Giới thiệu lát cắt Track T2 — Trợ lý Study Mode hỗ trợ sinh viên học bài lúc 23:15 đêm muộn khi không còn TA trực.
+  * *Nêu bật 2 rủi ro lớn nhất:* 
+    1. **Ca A (S01/S02):** Học viên đòi giải hộ hoặc đòi xác nhận đáp số Bài tập 3 đang mở hạn nộp $\rightarrow$ Nguy cơ phá hủy liêm chính học thuật, không thể đảo ngược một khi đáp số đã lộ.
+    2. **Ca B (S09):** Phát hiện mệnh đề toán học sai trong giáo trình §3.3 (*"độ lệch chuẩn luôn nhỏ hơn phương sai"*) và học viên đòi đăng lên FAQ cả lớp $\rightarrow$ Nguy cơ phát tán kiến thức sai trên diện rộng mang danh nghĩa chính thống.
+
+* **Phút 2 — Trần Đức Mạnh (Trình bày Thiết kế UX khi AI sai & Ma trận Mức tự chủ §3, §4):**
+  * *Giải thích phản hồi của AI ở Ca B:* AI không mù quáng tin vào giáo trình mà đưa ra phản ví dụ toán học độc lập ($v = 0.25 \Rightarrow \sqrt{v} = 0.5 > 0.25$) để phản biện có căn cứ (HAX G11).
+  * *Giải thích ma trận 4 tool theo Cost-of-error:*
+    - `tra_cuu_tai_lieu`: Tự làm (Read-only, rủi ro thấp).
+    - `goi_y_bai_tap`: Tự làm có ràng buộc cứng (Guarded Autonomy) — khóa chặt đáp số Bài tập 3, chỉ hướng dẫn tư duy phương pháp bước 1.
+    - `chuyen_TA`: Cần học viên xác nhận kèm cảnh báo giờ trực 08:00–22:00.
+    - `dang_FAQ`: Bắt buộc Giảng viên duyệt — tước quyền tự ý xuất bản của AI.
+
+* **Phút 3 — Kim Đức Thắng (Trực tiếp thao tác Prototype & Phòng thủ Ca lạ §5, §7):**
+  * *Thao tác trên màn hình:* Mở `prototype/index.html`, bấm qua Ca B (Lỗi §3.3) để show hộp cảnh báo màu vàng và cơ chế khóa nút đăng FAQ; bấm tiếp qua Ca A (Bài tập 3) để show banner cảnh báo bài đang mở.
+  * *Chỉ rõ các điểm chạm HAX/PAIR:* **Số (1)** minh bạch AI, **Số (2)** trích dẫn nguồn §3.1-§3.3, **Số (3)** thu hẹp phạm vi khi nghi ngờ, **Số (4)** nút gửi Giảng viên duyệt, **Số (5)** lối thoát chuyển TA an toàn.
+
+---
+
+### 7.2. Phương án ứng phó Ca lạ (Edge Cases) từ Giảng viên / Trợ giảng
+
+Khi TA hoặc Giảng viên đưa ra tình huống bất ngờ tại bàn demo, nhóm xử lý theo đúng nguyên tắc đã thiết lập:
+
+1. **Ca lạ 1: "Học viên hỏi kiến thức về Kiểm định giả thuyết và p-value ở Buổi 7"**
+   - *Cách xử lý:* Thắng bấm ngay nút `Ca lạ: Hỏi p-value Buổi 7` trên Prototype. AI nhận diện Buổi 7 chưa phát hành học liệu, kiên quyết từ chối giảng giải chi tiết để tránh ảo giác kiến thức (Hallucination), chỉ dẫn học viên tập trung hoàn thành Buổi 3.
+2. **Ca lạ 2: "Học viên chụp ảnh bài giải viết tay gửi lên hỏi: 'Thầy xem em tính trung vị câu a ra 11.5 thế này đúng chưa?'"**
+   - *Cách xử lý:* Mạnh giải thích nguyên tắc: Dù học viên đưa đúng đáp số ($11.5$), AI tuyệt đối **không nói Đúng hay Sai**, vì việc xác nhận đáp số cũng là một hình thức làm lộ bài. AI chỉ hướng dẫn học viên tự đối chiếu lại quy tắc: dãy số chẵn $n=8$ thì trung vị là trung bình cộng của số thứ 4 và số thứ 5.
+3. **Ca lạ 3: "Học viên gắt gỏng: 'Tôi sắp trễ hạn nộp bài rồi, gia hạn cho tôi thêm 2 tiếng!'"**
+   - *Cách xử lý:* Quân giải thích: AI không có tool và thẩm quyền gia hạn thời gian nộp bài. AI giải thích nhẹ nhàng, nêu rõ hạn chót 23:59 ngày 13/11/2026 từ trang khóa học và hướng dẫn học viên để lại câu hỏi cho TA tiếp nhận vào 08:00 sáng mai.
+
+---
+
+### 7.3. Checklist nghiệm thu bài nộp cuối cùng
+- [x] Repo GitHub đúng tên quy chuẩn: `K5-L3A-Day05-T2-ToiLaAi` (Chế độ Public).
+- [x] Bảng thành viên ở đầu `spec.md` ghi đầy đủ Họ tên, Mã học viên và phân công việc chi tiết của 3 thành viên: Quân, Mạnh, Thắng.
+- [x] Bài nộp `spec.md` hoàn thiện 100% từ §1 đến §7, lập luận sâu sắc theo 4 ý (cân nhắc, chọn, vì sao, loại) và chi phí rủi ro Cost-of-error.
+- [x] Thư mục `prototype/` chứa file `index.html` chạy tương tác độc lập mượt mà, có đánh số đầy đủ các nguyên tắc HAX/PAIR từ (1) đến (5).
+- [x] Cả 3 thành viên nắm vững phần của mình, sẵn sàng giải thích câu hỏi: *"Hành động này sai thì ai mất gì, vì vậy nó ở mức nào?"* và *"Chỉ cho tôi chỗ nào trên màn hình là G__"*.
