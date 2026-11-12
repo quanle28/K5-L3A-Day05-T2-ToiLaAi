@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LAB5 - Prototype Track T2 Giáo Dục - Nhóm ToiLaAi</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-light: #eff6ff;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --ink: #0f172a;
+      --mut: #64748b;
+      --border: #e2e8f0;
+      --amber: #d97706;
+      --amber-bg: #fffbeb;
+      --green: #16a34a;
+      --green-bg: #f0fdf4;
+      --tag: #c2410c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.5; padding: 20px; }
+    .container { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 460px 1fr; gap: 24px; }
+    
+    /* Cột trái: Giao diện điện thoại / Chatbot */
+    .phone { background: var(--card); border: 2px solid var(--border); border-radius: 24px; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.08); display: flex; flex-direction: column; height: 680px; }
+    .chat-header { background: #1e293b; color: white; padding: 14px 18px; }
+    .chat-header h2 { font-size: 15px; font-weight: 600; }
+    .chat-header p { font-size: 12px; color: #94a3b8; }
+    .badge-status { display: inline-block; background: #334155; color: #38bdf8; font-size: 11px; padding: 2px 8px; border-radius: 99px; margin-top: 4px; }
+
+    .chat-body { flex: 1; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; background: #fdfdfd; }
+    .msg { max-width: 88%; font-size: 13.5px; border-radius: 16px; padding: 10px 14px; }
+    .msg-user { align-self: flex-end; background: var(--primary); color: white; border-bottom-right-radius: 4px; }
+    .msg-ai { align-self: flex-start; background: var(--primary-light); color: var(--ink); border: 1px solid #dbeafe; border-bottom-left-radius: 4px; width: 100%; }
+    
+    /* Khối thẻ bằng chứng & cảnh báo */
+    .box-ref { background: white; border-left: 3px solid var(--primary); padding: 8px 12px; border-radius: 6px; margin: 8px 0; font-size: 12.5px; color: #334155; }
+    .box-warn { background: var(--amber-bg); border: 1px solid #fde68a; color: var(--amber); padding: 6px 10px; border-radius: 8px; font-size: 12px; font-weight: 600; margin: 6px 0; display: flex; align-items: center; gap: 6px; }
+    
+    /* Nút tương tác / Gợi ý */
+    .actions { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+    .btn { background: white; border: 1px solid var(--border); padding: 8px 12px; border-radius: 8px; font-size: 13px; text-align: left; cursor: pointer; transition: all 0.2s; font-weight: 500; }
+    .btn:hover { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
+    .btn-ta { border-color: #cbd5e1; color: #475569; background: #f8fafc; }
+    .btn-ta:hover { background: #fee2e2; border-color: #ef4444; color: #b91c1c; }
+
+    /* Số đánh dấu HAX/PAIR */
+    .tag { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--tag); color: white; font-size: 11px; font-weight: bold; margin-right: 4px; vertical-align: middle; }
+
+    /* Cột phải: Bảng thuyết minh nguyên tắc */
+    .sidebar { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 22px; }
+    .sidebar h1 { font-size: 19px; margin-bottom: 6px; color: var(--ink); }
+    .sidebar p.sub { font-size: 13.5px; color: var(--mut); margin-bottom: 18px; }
+    .rule-card { border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 14px; }
+    .rule-card:last-child { border-bottom: none; }
+    .rule-card h3 { font-size: 14px; display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+    .rule-card p { font-size: 13px; color: #475569; }
+
+    /* Modal kết quả kiểm tra */
+    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 99; }
+    .modal-content { background: white; padding: 22px; border-radius: 16px; max-width: 420px; width: 90%; }
+    .modal-content h3 { font-size: 16px; margin-bottom: 8px; }
+    .modal-content p { font-size: 13.5px; color: var(--mut); margin-bottom: 14px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- CỘT 1: PROTOTYPE TRÊN ĐIỆN THOẠI -->
+  <div class="phone">
+    <div class="chat-header">
+      <h2>Trợ lý học tập · AI Study Mode</h2>
+      <p>Khoá học: Nhập môn Phân tích dữ liệu (Buổi 3: Thống kê mô tả)</p>
+      <div class="badge-status">● Chế độ tự học 23:15 (Ngoài giờ TA trực 08:00 - 22:00)</div>
+    </div>
+
+    <div class="chat-body">
+      <!-- Tin nhắn học viên lúc đêm muộn -->
+      <div class="msg msg-user">
+        Cô ơi em làm bài 3, tính ra lương trung vị của 8 người là 11.5 triệu, cô xem giúp em đúng chưa với ạ, em sắp nộp bài rồi!
+      </div>
+
+      <!-- AI phản hồi có kiểm soát -->
+      <div class="msg msg-ai">
+        <div class="box-warn">
+          <span class="tag">1</span> ⚠️ BÀI TẬP 3 ĐANG MỞ TÍNH ĐIỂM (HẠN: 13/11 23:59)
+        </div>
+
+        <p>Theo quy chế môn học, mình <b>không thể trực tiếp xác nhận đáp số</b> để đảm bảo liêm chính học thuật. Tuy nhiên, mình sẽ đồng hành hướng dẫn bạn tự kiểm tra lại phương pháp!</p>
+
+        <div class="box-ref">
+          <span class="tag">2</span> <b>Căn cứ giáo trình §3.2 Trung vị:</b><br>
+          <i>"Nếu số giá trị là chẵn, trung vị là trung bình cộng của hai giá trị đứng giữa sau khi sắp xếp tăng dần."</i>
+        </div>
+
+        <p style="margin-top: 6px;">
+          <span class="tag">3</span> <b>Gợi ý tự kiểm tra:</b> Dãy số lương gồm 8 nhân viên (số lượng chẵn). Bạn đã sắp xếp dãy số theo thứ tự tăng dần chưa và 2 giá trị ở vị trí số 4 và số 5 của bạn là bao nhiêu?
+        </p>
+
+        <!-- Khối điều khiển mức tự chủ -->
+        <div class="actions">
+          <div style="font-size: 11.5px; font-weight: 600; color: var(--mut); margin-bottom: 2px;">
+            <span class="tag">4</span> BẠN CÓ THỂ CHỌN:
+          </div>
+          <button class="btn" onclick="showStep1()">👉 Bấm để xem gợi ý bước 1: Xếp thứ tự dãy số</button>
+          <button class="btn btn-ta" onclick="showModalTA()">📩 Gửi câu hỏi vào hàng đợi của TA (Phản hồi sau 08:00 sáng)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CỘT 2: BẢNG THUYẾT MINH NGUYÊN TẮC HAX / PAIR -->
+  <div class="sidebar">
+    <h1>Thuyết minh Prototype & Mức tự chủ</h1>
+    <p class="sub">Ca khó nhất: Học viên hỏi xin đáp số Bài tập 3 đang mở lúc 23:15 (Track T2 Giáo dục).</p>
+
+    <div class="rule-card">
+      <h3><span class="tag">1</span> HAX G1: Làm rõ hệ thống làm được gì & Giới hạn</h3>
+      <p>Hiển thị nhãn cảnh báo vàng ngay lập tức báo hiệu Bài tập 3 đang mở tính điểm. AI thẳng thắn từ chối đưa đáp án để bảo vệ liêm chính học thuật, ngăn chặn hành vi gian lận.</p>
+    </div>
+
+    <div class="rule-card">
+      <h3><span class="tag">2</span> PAIR Explainability & HAX G11: Dẫn chứng căn cứ</h3>
+      <p>Trích dẫn chính xác mã mục <b>§3.2</b> trong tài liệu buổi 3. Học viên nhìn thấy định nghĩa chuẩn để tự tin đối chiếu mà không phụ thuộc vào trí nhớ của chatbot.</p>
+    </div>
+
+    <div class="rule-card">
+      <h3><span class="tag">3</span> HAX G10: Thu hẹp phạm vi / Gợi ý Socratic</h3>
+      <p>Thay vì đoán mò hoặc giải bài hộ, AI đặt câu hỏi gợi mở từng bước: nhắc người học xếp thứ tự tăng dần và tìm 2 số chính giữa.</p>
+    </div>
+
+    <div class="rule-card">
+      <h3><span class="tag">4</span> Mức tự chủ (Autonomy Guardrails): Quyền kiểm soát</h3>
+      <p><b>Việc cấm:</b> Không có nút "Hiện đáp án".<br>
+      <b>Việc tự làm:</b> Cho phép học viên bấm xem từng bước gợi ý phương pháp.<br>
+      <b>Chuyển người (Graceful Failure):</b> Cung cấp nút gửi hàng đợi cho TA kèm quản lý kỳ vọng thời gian rõ ràng (sau 08:00 sáng mai).</p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal giả lập chuyển TA -->
+<div class="modal" id="modalTA">
+  <div class="modal-content">
+    <h3>Đã ghi nhận yêu cầu hỗ trợ!</h3>
+    <p>Câu hỏi của bạn đã được chuyển vào hàng đợi của TA phụ trách buổi 3. Do hiện tại là 23:15 (ngoài ca trực), TA sẽ giải đáp trực tiếp cho bạn vào đầu ca trực sáng mai (sau 08:00).</p>
+    <button class="btn" style="width: 100%; text-align: center; background: var(--primary); color: white;" onclick="closeModal()">Đóng cửa sổ</button>
+  </div>
+</div>
+
+<script>
+  function showStep1() {
+    alert("Gợi ý bước 1: Dãy 8 mức lương khi xếp tăng dần là:\n9, 10, 10, [11, 12], 12, 13, 45.\nHai giá trị đứng giữa là 11 và 12. Bây giờ bạn hãy tính trung bình cộng của 2 số này nhé!");
+  }
+  function showModalTA() {
+    document.getElementById("modalTA").style.display = "flex";
+  }
+  function closeModal() {
+    document.getElementById("modalTA").style.display = "none";
+  }
+</script>
+
+</body>
+</html>
