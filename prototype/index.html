@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LMS Study Mode Prototype · Track T2 Giáo dục · Nhóm ToiLaAi</title>
+  <script src="env.js"></script>
   <style>
     :root {
       --bg: #f8fafc;
@@ -561,6 +562,10 @@
       <span>Học phần: Nhập môn Phân tích Dữ liệu</span>
     </div>
     <div class="nav-meta">
+      <button id="apiToggleBtn" onclick="toggleApiMode()" style="background:#1e293b; color:#38bdf8; border:1px solid #0284c7; border-radius:999px; padding:4px 12px; font-size:12px; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:5px;">
+        <span style="width:7px; height:7px; border-radius:50%; background:#22c55e;"></span>
+        <span>⚡ AI Thật: OpenRouter GPT-4o-mini (BẬT)</span>
+      </button>
       <div class="clock-pill">
         <span class="clock-dot"></span>
         <span>Thời gian hệ thống: <strong>23:35</strong> (Đêm muộn 12/11/2026)</span>
@@ -894,7 +899,48 @@
       chatStream.scrollTop = chatStream.scrollHeight;
     }
 
-    function sendUserMessage() {
+    // LIVE AI CONFIGURATION (Đọc từ file .env qua env.js hoặc localStorage, TUYỆT ĐỐI không commit key lên Git)
+    let useLiveAi = true;
+    function getOpenRouterKey() {
+      if (window.ENV && window.ENV.OPENROUTER_API_KEY && window.ENV.OPENROUTER_API_KEY !== 'your_openrouter_api_key_here') {
+        return window.ENV.OPENROUTER_API_KEY;
+      }
+      return localStorage.getItem('OPENROUTER_API_KEY') || localStorage.getItem('openrouter_key') || '';
+    }
+
+    function toggleApiMode() {
+      useLiveAi = !useLiveAi;
+      const btn = document.getElementById('apiToggleBtn');
+      if (useLiveAi) {
+        btn.innerHTML = '<span style="width:7px; height:7px; border-radius:50%; background:#22c55e;"></span><span>⚡ AI Thật: OpenRouter GPT-4o-mini (BẬT)</span>';
+        btn.style.color = '#38bdf8';
+        btn.style.borderColor = '#0284c7';
+      } else {
+        btn.innerHTML = '<span style="width:7px; height:7px; border-radius:50%; background:#94a3b8;"></span><span>💻 Mô phỏng Offline (TẮT AI Thật)</span>';
+        btn.style.color = '#94a3b8';
+        btn.style.borderColor = '#475569';
+      }
+    }
+
+    const SYSTEM_PROMPT = `Bạn là Trợ lý Học tập AI (Study Mode) của khóa học LMS "Nhập môn Phân tích Dữ liệu", Buổi 3: Thống kê mô tả.
+BỐI CẢNH DỮ LIỆU:
+- Giáo trình Buổi 3 gồm:
+  §3.1 Trung bình cộng (nhạy cảm ngoại lai).
+  §3.2 Trung vị (kháng ngoại lai, dùng cho dữ liệu lệch).
+  §3.3 Phương sai và độ lệch chuẩn. ĐẶC BIỆT: Giáo trình có câu "Vì là căn bậc hai, độ lệch chuẩn luôn nhỏ hơn phương sai" -> Phát biểu này SAI TOÁN HỌC khi 0 < phương sai < 1 (ví dụ v = 0.25 => căn v = 0.5 > 0.25).
+  §3.4 Giá trị ngoại lai.
+  §3.5 Bài tập 3 (lương 8 nhân viên: 9, 10, 10, 11, 12, 12, 13, 45). Hạn nộp 23:59 ngày 13/11/2026 (ĐANG MỞ TÍNH ĐIỂM).
+- Buổi 4-10: CHƯA MỞ tài liệu.
+- Giờ TA: 08:00 - 22:00. Hiện tại đang là 23:35 đêm muộn (TA ngoại tuyến).
+
+RÀO CHẮN BẮT BUỘC:
+1. BÀI TẬP 3 ĐANG MỞ: Tuyệt đối KHÔNG giải hộ, KHÔNG đưa ra đáp số cuối cùng (như 16.5 hay 11.5), KHÔNG xác nhận con số học viên đưa ra là đúng hay sai. Chỉ hướng dẫn công thức và bước sắp xếp đầu tiên theo §3.1 và §3.2.
+2. MỤC §3.3 & FAQ: Nếu học viên hỏi câu "luôn nhỏ hơn" hoặc đòi đăng FAQ cả lớp, BẮT BUỘC phải chỉ ra rằng câu đó sai khi phương sai < 1 (nêu ví dụ v = 0.25 => căn = 0.5). TỪ CHỐI đăng FAQ trực tiếp vì cần Giảng viên duyệt.
+3. SLIDE 12: Thông báo tài liệu chỉ có mục text §3.1-§3.5, không có slide.
+4. BUỔI 7 / P-VALUE: Thông báo buổi chưa mở, khuyên học viên tập trung Buổi 3.
+5. Giữ phong cách sư phạm nhã nhặn, trích dẫn mã mục §3.1 - §3.3 cụ thể.`;
+
+    async function sendUserMessage() {
       const input = document.getElementById('userInput');
       const val = input.value.trim();
       if (!val) return;
@@ -907,10 +953,71 @@
       input.value = '';
       chatStream.scrollTop = chatStream.scrollHeight;
 
-      // Deselect predefined scenario button
       document.querySelectorAll('.btn-scenario').forEach(b => b.classList.remove('active'));
 
-      // Dynamic AI engine
+      // If Live AI is ON, call OpenRouter gpt-4o-mini
+      if (useLiveAi) {
+        // Show loading indicator
+        const loadingDiv = document.createElement('div');
+        loadingDiv.className = 'message bot';
+        loadingDiv.id = 'loadingMsg';
+        loadingDiv.innerHTML = `
+          <div class="bot-name-label">Trợ lý Study Mode (⚡ Live AI via OpenRouter)</div>
+          <div class="bubble" style="color:#64748b; font-style:italic;">
+            <span>AI đang phân tích đối chiếu giáo trình Buổi 3...</span>
+          </div>
+        `;
+        chatStream.appendChild(loadingDiv);
+        chatStream.scrollTop = chatStream.scrollHeight;
+
+        try {
+          const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+            method: "POST",
+            headers: {
+              "Authorization": "Bearer " + getOpenRouterKey(),
+              "Content-Type": "application/json",
+              "HTTP-Referer": window.location.href,
+              "X-Title": "LMS Study Mode Prototype"
+            },
+            body: JSON.stringify({
+              model: "openai/gpt-4o-mini",
+              messages: [
+                { role: "system", content: SYSTEM_PROMPT },
+                { role: "user", content: val }
+              ],
+              temperature: 0.2
+            })
+          });
+
+          const data = await res.json();
+          const loading = document.getElementById('loadingMsg');
+          if (loading) loading.remove();
+
+          if (data && data.choices && data.choices[0] && data.choices[0].message) {
+            const reply = data.choices[0].message.content;
+            const botDiv = document.createElement('div');
+            botDiv.className = 'message bot';
+            botDiv.innerHTML = `
+              <div class="bot-name-label">Trợ lý Study Mode (⚡ Live GPT-4o-mini)</div>
+              <div class="bubble">
+                <div>${reply.replace(/\n/g, '<br>')}</div>
+                <div class="actions-cluster" style="margin-top:10px;">
+                  <button class="act-btn" onclick="alert('Đã gửi câu hỏi vào hàng đợi TA lúc 08:00 sáng!')"><span class="hax-badge">5</span>Hỏi TA (hỗ trợ sau 08:00)</button>
+                </div>
+              </div>
+            `;
+            chatStream.appendChild(botDiv);
+            chatStream.scrollTop = chatStream.scrollHeight;
+            return;
+          }
+        } catch (err) {
+          console.warn("Live API call error, falling back to local engine:", err);
+          const loading = document.getElementById('loadingMsg');
+          if (loading) loading.remove();
+        }
+      }
+
+      // Dynamic Local Fallback Engine
       const lower = val.toLowerCase();
       setTimeout(() => {
         let botContent = '';

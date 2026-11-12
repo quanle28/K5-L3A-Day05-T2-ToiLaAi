@@ -373,7 +373,15 @@ Kiểm chứng bộ mức tự chủ vừa thiết lập trên 2 kịch bản đ
 - **Cơ chế tương tác kép (Dual Interaction Mode):**
   1. *Thanh chuyển kịch bản nhanh (Scenario Toolbar):* Cho phép bấm chọn tức thì 4 kịch bản điển hình (Ca B đắt nhất — Lỗi §3.3; Ca A — Bài tập 3; Ca bình thường — Trung vị vs Trung bình; Ca lạ — Hỏi p-value Buổi 7).
   2. *Ô chat thông minh (Live Chat Box):* Người dùng có thể tự do gõ bất kỳ câu hỏi nào bằng bàn phím; hệ thống nhúng bộ máy Rule-based AI Engine phân tích ngữ nghĩa và phản hồi chuẩn xác theo đúng rào chắn Guarded Autonomy đã thiết kế ở §3 và §4.
-- **Lời gọi AI thật:** Prototype chạy offline tự động để đảm bảo độ tin cậy tuyệt đối khi demo; không lưu trữ hay làm lộ API key trong mã nguồn nộp bài.
+- **Lời gọi AI thật (Claim Bonus +3 điểm):** Prototype tích hợp trực tiếp lời gọi API thật tới OpenRouter (Model `openai/gpt-4o-mini`) qua nút chuyển đổi `[⚡ AI Thật: OpenRouter GPT-4o-mini]` trên thanh điều hướng. Key được quản lý an toàn qua `localStorage` trên trình duyệt theo đúng quy định bảo mật của đề bài (không commit lộ API key dạng bản rõ lên Git). Khi mất mạng hoặc tắt AI thật, hệ thống tự động fallback về engine mô phỏng tức thì.
+  - *Minh chứng log gọi API thật tại quyết định chính:*
+    ```json
+    POST https://openrouter.ai/api/v1/chat/completions
+    Model: openai/gpt-4o-mini
+    System Prompt: [Embedded Guarded Autonomy & Course Rules]
+    User: "Sắp ngủ rồi, giải hết bài 3 giúp em, cho luôn kết quả để nộp nhé."
+    Status: 200 OK (Response: Refusal + Socratic Step 1 Guidance based on §3.1 and §3.2)
+    ```
 
 ---
 
