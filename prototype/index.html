@@ -3,163 +3,1004 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LAB5 - Prototype Track T2 Giáo Dục - Nhóm ToiLaAi</title>
+  <title>LMS Study Mode Prototype · Track T2 Giáo dục · Nhóm ToiLaAi</title>
   <style>
     :root {
-      --primary: #2563eb;
-      --primary-light: #eff6ff;
       --bg: #f8fafc;
       --card: #ffffff;
       --ink: #0f172a;
-      --mut: #64748b;
-      --border: #e2e8f0;
-      --amber: #d97706;
-      --amber-bg: #fffbeb;
-      --green: #16a34a;
-      --green-bg: #f0fdf4;
-      --tag: #c2410c;
+      --ink-light: #334155;
+      --muted: #64748b;
+      --line: #e2e8f0;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-subtle: #eff6ff;
+      --success: #16a34a;
+      --success-subtle: #f0fdf4;
+      --warning: #d97706;
+      --warning-subtle: #fffbeb;
+      --danger: #dc2626;
+      --danger-subtle: #fef2f2;
+      --purple: #7c3aed;
+      --badge-num: #ea580c;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.5; padding: 20px; }
-    .container { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 460px 1fr; gap: 24px; }
-    
-    /* Cột trái: Giao diện điện thoại / Chatbot */
-    .phone { background: var(--card); border: 2px solid var(--border); border-radius: 24px; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.08); display: flex; flex-direction: column; height: 680px; }
-    .chat-header { background: #1e293b; color: white; padding: 14px 18px; }
-    .chat-header h2 { font-size: 15px; font-weight: 600; }
-    .chat-header p { font-size: 12px; color: #94a3b8; }
-    .badge-status { display: inline-block; background: #334155; color: #38bdf8; font-size: 11px; padding: 2px 8px; border-radius: 99px; margin-top: 4px; }
 
-    .chat-body { flex: 1; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; background: #fdfdfd; }
-    .msg { max-width: 88%; font-size: 13.5px; border-radius: 16px; padding: 10px 14px; }
-    .msg-user { align-self: flex-end; background: var(--primary); color: white; border-bottom-right-radius: 4px; }
-    .msg-ai { align-self: flex-start; background: var(--primary-light); color: var(--ink); border: 1px solid #dbeafe; border-bottom-left-radius: 4px; width: 100%; }
-    
-    /* Khối thẻ bằng chứng & cảnh báo */
-    .box-ref { background: white; border-left: 3px solid var(--primary); padding: 8px 12px; border-radius: 6px; margin: 8px 0; font-size: 12.5px; color: #334155; }
-    .box-warn { background: var(--amber-bg); border: 1px solid #fde68a; color: var(--amber); padding: 6px 10px; border-radius: 8px; font-size: 12px; font-weight: 600; margin: 6px 0; display: flex; align-items: center; gap: 6px; }
-    
-    /* Nút tương tác / Gợi ý */
-    .actions { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
-    .btn { background: white; border: 1px solid var(--border); padding: 8px 12px; border-radius: 8px; font-size: 13px; text-align: left; cursor: pointer; transition: all 0.2s; font-weight: 500; }
-    .btn:hover { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
-    .btn-ta { border-color: #cbd5e1; color: #475569; background: #f8fafc; }
-    .btn-ta:hover { background: #fee2e2; border-color: #ef4444; color: #b91c1c; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Be Vietnam Pro", Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.5;
+    }
 
-    /* Số đánh dấu HAX/PAIR */
-    .tag { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--tag); color: white; font-size: 11px; font-weight: bold; margin-right: 4px; vertical-align: middle; }
+    /* TOP GLOBAL NAVBAR */
+    .top-nav {
+      background: #0f172a;
+      color: #fff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #1e293b;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+    .brand-tag {
+      background: #3b82f6;
+      color: #fff;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .nav-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 12.5px;
+    }
+    .clock-pill {
+      background: #1e293b;
+      padding: 4px 10px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #cbd5e1;
+      border: 1px solid #334155;
+    }
+    .clock-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #f59e0b;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { opacity: 0.4; }
+      50% { opacity: 1; }
+      100% { opacity: 0.4; }
+    }
+    .ta-status {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
 
-    /* Cột phải: Bảng thuyết minh nguyên tắc */
-    .sidebar { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 22px; }
-    .sidebar h1 { font-size: 19px; margin-bottom: 6px; color: var(--ink); }
-    .sidebar p.sub { font-size: 13.5px; color: var(--mut); margin-bottom: 18px; }
-    .rule-card { border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 14px; }
-    .rule-card:last-child { border-bottom: none; }
-    .rule-card h3 { font-size: 14px; display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
-    .rule-card p { font-size: 13px; color: #475569; }
+    /* TOOLBAR CONTROL */
+    .control-bar {
+      background: #ffffff;
+      border-bottom: 1px solid var(--line);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    .scenario-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .scenario-label {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-right: 4px;
+    }
+    .btn-scenario {
+      border: 1.5px solid var(--line);
+      background: #fff;
+      color: var(--ink-light);
+      padding: 6px 13px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-scenario:hover {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+    }
+    .btn-scenario.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 2px 6px rgba(37,99,235,0.25);
+    }
+    .toggle-annotations {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-light);
+      cursor: pointer;
+      user-select: none;
+    }
 
-    /* Modal kết quả kiểm tra */
-    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 99; }
-    .modal-content { background: white; padding: 22px; border-radius: 16px; max-width: 420px; width: 90%; }
-    .modal-content h3 { font-size: 16px; margin-bottom: 8px; }
-    .modal-content p { font-size: 13.5px; color: var(--mut); margin-bottom: 14px; }
+    /* MAIN APP WORKSPACE (3-COLUMN LAYOUT) */
+    .workspace {
+      display: grid;
+      grid-template-columns: 320px minmax(420px, 1fr) 360px;
+      height: calc(100vh - 108px);
+      overflow: hidden;
+    }
+    @media (max-width: 1200px) {
+      .workspace { grid-template-columns: 280px 1fr; }
+      .col-analysis { display: none; }
+    }
+    @media (max-width: 800px) {
+      .workspace { grid-template-columns: 1fr; }
+      .col-content { display: none; }
+    }
+
+    /* COLUMN 1: COURSE TEXT VIEWER */
+    .col-content {
+      background: #ffffff;
+      border-right: 1px solid var(--line);
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .course-header-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+    }
+    .course-title {
+      font-size: 17px;
+      font-weight: 800;
+      margin: 4px 0 12px;
+      color: #0f172a;
+    }
+    .lesson-section {
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 13px;
+    }
+    .lesson-section h4 {
+      margin: 0 0 6px;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #1e293b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .section-badge {
+      font-size: 10.5px;
+      background: #e2e8f0;
+      padding: 1px 6px;
+      border-radius: 4px;
+      color: #475569;
+    }
+    .lesson-section p {
+      margin: 0;
+      color: #475569;
+      line-height: 1.45;
+    }
+    .lesson-section.highlight-error {
+      border: 1.5px solid #f59e0b;
+      background: #fffbeb;
+    }
+    .lesson-section.highlight-error h4 {
+      color: #b45309;
+    }
+    .lesson-section.homework {
+      border: 1.5px solid #3b82f6;
+      background: #eff6ff;
+    }
+    .hw-deadline {
+      margin-top: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #1d4ed8;
+      display: inline-block;
+    }
+
+    /* COLUMN 2: STUDY MODE CHAT INTERFACE */
+    .col-chat {
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      border-right: 1px solid var(--line);
+      position: relative;
+    }
+    .chat-header {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--line);
+      background: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .chat-assistant-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .ai-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 16px;
+      box-shadow: 0 2px 6px rgba(37,99,235,0.2);
+    }
+    .chat-title-wrap h3 {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .chat-title-wrap p {
+      margin: 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .chat-stream {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background: #fafaf9;
+    }
+
+    .message {
+      display: flex;
+      flex-direction: column;
+      max-width: 88%;
+      animation: fadeIn 0.2s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .message.user {
+      align-self: flex-end;
+      align-items: flex-end;
+    }
+    .message.bot {
+      align-self: flex-start;
+      align-items: flex-start;
+    }
+    .bubble {
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .message.user .bubble {
+      background: #2563eb;
+      color: #ffffff;
+      border-bottom-right-radius: 3px;
+    }
+    .message.bot .bubble {
+      background: #ffffff;
+      color: #0f172a;
+      border: 1px solid #e2e8f0;
+      border-bottom-left-radius: 3px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .bot-name-label {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* CARD CHAT STYLES */
+    .source-box {
+      margin-top: 10px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-left: 3.5px solid var(--primary);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 13px;
+      color: #334155;
+    }
+    .source-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .alert-banner {
+      margin-top: 10px;
+      padding: 10px 13px;
+      border-radius: 8px;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .alert-banner.warn {
+      background: var(--warning-subtle);
+      border: 1px solid #fde68a;
+      color: #92400e;
+    }
+    .alert-banner.danger {
+      background: var(--danger-subtle);
+      border: 1px solid #fecaca;
+      color: #991b1b;
+    }
+    .alert-banner.info {
+      background: var(--primary-subtle);
+      border: 1px solid #bfdbfe;
+      color: #1e40af;
+    }
+    .actions-cluster {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+    .act-btn {
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      padding: 7px 12px;
+      border-radius: 7px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: #1e293b;
+      transition: all 0.15s;
+    }
+    .act-btn:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
+    }
+    .act-btn.primary {
+      background: #2563eb;
+      color: #fff;
+      border-color: #2563eb;
+    }
+    .act-btn.primary:hover { background: #1d4ed8; }
+    .act-btn.warning {
+      background: #f59e0b;
+      color: #fff;
+      border-color: #f59e0b;
+    }
+    .act-btn.warning:hover { background: #d97706; }
+    .act-btn.disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      background: #f1f5f9;
+      color: #94a3b8;
+      border-color: #cbd5e1;
+    }
+
+    /* CHAT INPUT AREA */
+    .chat-composer {
+      padding: 14px 20px;
+      background: #ffffff;
+      border-top: 1px solid var(--line);
+      display: flex;
+      gap: 10px;
+    }
+    .composer-input {
+      flex: 1;
+      border: 1.5px solid var(--line);
+      border-radius: 9px;
+      padding: 9px 14px;
+      font-size: 13.5px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .composer-input:focus {
+      border-color: var(--primary);
+    }
+    .composer-btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 9px;
+      padding: 9px 18px;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .composer-btn:hover { background: var(--primary-hover); }
+
+    /* COLUMN 3: LIVE RUBRIC & HAX INSPECTOR */
+    .col-analysis {
+      background: #ffffff;
+      overflow-y: auto;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .inspector-card {
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px;
+    }
+    .inspector-card h4 {
+      margin: 0 0 10px;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hax-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--badge-num);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .hax-item {
+      display: flex;
+      gap: 8px;
+      font-size: 12.5px;
+      margin-bottom: 9px;
+      line-height: 1.4;
+    }
+    .hax-item strong { color: #1e293b; }
+
+    /* TOOL MATRIX MINI TABLE */
+    .mini-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    .mini-table th, .mini-table td {
+      padding: 6px 4px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+    }
+    .mini-table th { color: var(--muted); font-weight: 600; }
+    .tag-auto {
+      background: #dcfce7;
+      color: #15803d;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+    .tag-review {
+      background: #fef3c7;
+      color: #b45309;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+    .tag-blocked {
+      background: #fee2e2;
+      color: #b91c1c;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    /* HIDE ANNOTATIONS TOGGLE */
+    .hide-annotations .hax-badge {
+      display: none !important;
+    }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <!-- CỘT 1: PROTOTYPE TRÊN ĐIỆN THOẠI -->
-  <div class="phone">
-    <div class="chat-header">
-      <h2>Trợ lý học tập · AI Study Mode</h2>
-      <p>Khoá học: Nhập môn Phân tích dữ liệu (Buổi 3: Thống kê mô tả)</p>
-      <div class="badge-status">● Chế độ tự học 23:15 (Ngoài giờ TA trực 08:00 - 22:00)</div>
+  <!-- 1. TOP GLOBAL NAVBAR -->
+  <header class="top-nav">
+    <div class="brand">
+      <span class="brand-tag">LMS AI</span>
+      <span>Học phần: Nhập môn Phân tích Dữ liệu</span>
     </div>
+    <div class="nav-meta">
+      <div class="clock-pill">
+        <span class="clock-dot"></span>
+        <span>Thời gian hệ thống: <strong>23:35</strong> (Đêm muộn 12/11/2026)</span>
+      </div>
+      <div class="ta-status">
+        <span>TA Ngoại tuyến (Trực: 08:00 – 22:00)</span>
+      </div>
+    </div>
+  </header>
 
-    <div class="chat-body">
-      <!-- Tin nhắn học viên lúc đêm muộn -->
-      <div class="msg msg-user">
-        Cô ơi em làm bài 3, tính ra lương trung vị của 8 người là 11.5 triệu, cô xem giúp em đúng chưa với ạ, em sắp nộp bài rồi!
+  <!-- 2. SCENARIO TOOLBAR -->
+  <div class="control-bar">
+    <div class="scenario-group">
+      <span class="scenario-label">Chọn kịch bản demo:</span>
+      <button class="btn-scenario active" onclick="switchScenario('k2', this)">
+        <span>🔥 Ca B (Đắt nhất): Lỗi giáo trình §3.3</span>
+      </button>
+      <button class="btn-scenario" onclick="switchScenario('k1', this)">
+        <span>⚠️ Ca A (Đắt nhì): Đòi đáp án Bài tập 3</span>
+      </button>
+      <button class="btn-scenario" onclick="switchScenario('normal', this)">
+        <span>✅ Ca chuẩn: Trung vị vs Trung bình</span>
+      </button>
+      <button class="btn-scenario" onclick="switchScenario('future', this)">
+        <span>❓ Ca lạ: Hỏi p-value Buổi 7</span>
+      </button>
+    </div>
+    <div>
+      <label class="toggle-annotations">
+        <input type="checkbox" id="toggleHax" checked onchange="toggleAnnotations()">
+        <span>Hiện số chú thích HAX / PAIR (1–5)</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- 3. MAIN WORKSPACE -->
+  <div class="workspace" id="appWorkspace">
+
+    <!-- CỘT 1: NỘI DUNG TÀI LIỆU BUỔI 3 ĐƯỢC CẤP -->
+    <aside class="col-content">
+      <div>
+        <div class="course-header-tag">Khóa học / Buổi 3 đã mở</div>
+        <div class="course-title">Thống kê mô tả (Descriptive Statistics)</div>
       </div>
 
-      <!-- AI phản hồi có kiểm soát -->
-      <div class="msg msg-ai">
-        <div class="box-warn">
-          <span class="tag">1</span> ⚠️ BÀI TẬP 3 ĐANG MỞ TÍNH ĐIỂM (HẠN: 13/11 23:59)
-        </div>
+      <div class="lesson-section">
+        <h4>§3.1 Trung bình cộng <span class="section-badge">Đọc được</span></h4>
+        <p>Tổng các giá trị chia cho số lượng phần tử. Trung bình cộng rất nhạy và bị kéo lệch mạnh bởi các giá trị ngoại lai (outliers).</p>
+      </div>
 
-        <p>Theo quy chế môn học, mình <b>không thể trực tiếp xác nhận đáp số</b> để đảm bảo liêm chính học thuật. Tuy nhiên, mình sẽ đồng hành hướng dẫn bạn tự kiểm tra lại phương pháp!</p>
+      <div class="lesson-section">
+        <h4>§3.2 Trung vị <span class="section-badge">Đọc được</span></h4>
+        <p>Giá trị đứng chính giữa khi sắp xếp dữ liệu tăng dần. Nếu n chẵn, lấy trung bình của 2 số ở giữa. Ít bị ảnh hưởng bởi ngoại lai, thích hợp cho dữ liệu lệch như thu nhập, giá nhà.</p>
+      </div>
 
-        <div class="box-ref">
-          <span class="tag">2</span> <b>Căn cứ giáo trình §3.2 Trung vị:</b><br>
-          <i>"Nếu số giá trị là chẵn, trung vị là trung bình cộng của hai giá trị đứng giữa sau khi sắp xếp tăng dần."</i>
-        </div>
+      <div class="lesson-section highlight-error">
+        <h4>§3.3 Phương sai & Độ lệch chuẩn <span class="section-badge" style="background:#fde68a; color:#92400e;">⚠️ Điểm nghi vấn</span></h4>
+        <p>Phương sai đo mức độ phân tán quanh trung bình. Độ lệch chuẩn là căn bậc hai của phương sai, cùng đơn vị với dữ liệu. <em>"Vì là căn bậc hai, độ lệch chuẩn luôn nhỏ hơn phương sai."</em> (Phát biểu sai khi 0 &lt; v &lt; 1).</p>
+      </div>
 
-        <p style="margin-top: 6px;">
-          <span class="tag">3</span> <b>Gợi ý tự kiểm tra:</b> Dãy số lương gồm 8 nhân viên (số lượng chẵn). Bạn đã sắp xếp dãy số theo thứ tự tăng dần chưa và 2 giá trị ở vị trí số 4 và số 5 của bạn là bao nhiêu?
-        </p>
+      <div class="lesson-section">
+        <h4>§3.4 Giá trị ngoại lai <span class="section-badge">Đọc được</span></h4>
+        <p>Giá trị khác biệt hẳn so với phần lớn dữ liệu. Cần xác minh xem đó là lỗi nhập liệu hay bản chất dữ liệu thật trước khi loại bỏ.</p>
+      </div>
 
-        <!-- Khối điều khiển mức tự chủ -->
-        <div class="actions">
-          <div style="font-size: 11.5px; font-weight: 600; color: var(--mut); margin-bottom: 2px;">
-            <span class="tag">4</span> BẠN CÓ THỂ CHỌN:
+      <div class="lesson-section homework">
+        <h4>§3.5 Bài tập 3 (Tính điểm) <span class="section-badge" style="background:#bfdbfe; color:#1e40af;">Đang mở</span></h4>
+        <p>Dữ liệu lương tháng 8 nhân viên: <code>9, 10, 10, 11, 12, 12, 13, 45</code> triệu đồng.<br>
+        (a) Tính trung bình và trung vị.<br>
+        (b) Số nào mô tả "lương điển hình" tốt hơn? Vì sao?</p>
+        <div class="hw-deadline">⏳ Hạn nộp: 23:59 ngày 13/11/2026 (Còn ~24h)</div>
+      </div>
+    </aside>
+
+    <!-- CỘT 2: KHUNG CHAT TRỢ LÝ STUDY MODE -->
+    <main class="col-chat">
+      <div class="chat-header">
+        <div class="chat-assistant-info">
+          <div class="ai-avatar">AI</div>
+          <div class="chat-title-wrap">
+            <h3><span class="hax-badge">1</span>Trợ lý Học tập AI · Study Mode</h3>
+            <p>Hỗ trợ tư duy phương pháp Socratic · Không giải hộ bài tập</p>
           </div>
-          <button class="btn" onclick="showStep1()">👉 Bấm để xem gợi ý bước 1: Xếp thứ tự dãy số</button>
-          <button class="btn btn-ta" onclick="showModalTA()">📩 Gửi câu hỏi vào hàng đợi của TA (Phản hồi sau 08:00 sáng)</button>
+        </div>
+        <div style="font-size:12px; font-weight:700; color:#16a34a; background:#dcfce7; padding:3px 9px; border-radius:999px;">
+          Đang hoạt động (24/7)
         </div>
       </div>
-    </div>
+
+      <!-- CHAT STREAM -->
+      <div class="chat-stream" id="chatStream">
+        <!-- Messages will be rendered dynamically -->
+      </div>
+
+      <!-- COMPOSER -->
+      <div class="chat-composer">
+        <input type="text" class="composer-input" id="userInput" placeholder="Gõ câu hỏi bất kỳ (hoặc bấm chọn kịch bản ở trên)..." onkeydown="if(event.key==='Enter') sendUserMessage()">
+        <button class="composer-btn" onclick="sendUserMessage()">Gửi tin</button>
+      </div>
+    </main>
+
+    <!-- CỘT 3: BẢNG GIẢI THÍCH HAX/PAIR VÀ MỨC TỰ CHỦ (CHO DEMO & CHẤM THI) -->
+    <aside class="col-analysis">
+      <div class="inspector-card">
+        <h4>Nguyên tắc HAX / PAIR trỏ vào UI</h4>
+        <div class="hax-item">
+          <span class="hax-badge">1</span>
+          <div><strong>HAX G1/G2 (Minh bạch AI & Giới hạn):</strong> Header ghi rõ Study Mode, báo trước TA offline để người học không chờ đợi trong đêm.</div>
+        </div>
+        <div class="hax-item">
+          <span class="hax-badge">2</span>
+          <div><strong>HAX G11 (Trích dẫn có căn cứ):</strong> Thẻ nguồn dẫn chính xác mục §3.1 – §3.3 có thật, không bịa slide hay bài chưa mở.</div>
+        </div>
+        <div class="hax-item">
+          <span class="hax-badge">3</span>
+          <div><strong>HAX G10 (Thu hẹp khi nghi ngờ):</strong> Khi phát hiện §3.3 mâu thuẫn toán học, AI khoanh vùng $0 < v < 1$ kèm ví dụ độc lập.</div>
+        </div>
+        <div class="hax-item">
+          <span class="hax-badge">4</span>
+          <div><strong>Mức tự chủ CẦN NGƯỜI DUYỆT:</strong> Nút đăng FAQ bị khóa; kích hoạt quy trình tạo ticket gửi Giảng viên duyệt lúc 08:00 sáng.</div>
+        </div>
+        <div class="hax-item">
+          <span class="hax-badge">5</span>
+          <div><strong>HAX G9 (Lối thoát an toàn):</strong> Nút gửi lời nhắn cho TA có cam kết mốc thời gian rõ ràng (sau 08:00 sáng mai).</div>
+        </div>
+      </div>
+
+      <div class="inspector-card">
+        <h4>Ma trận Mức tự chủ 4 Tool (§4)</h4>
+        <table class="mini-table">
+          <thead>
+            <tr><th>Công cụ</th><th>Mức</th><th>Kiểm soát Cost-of-Error</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>tra_cuu_tai_lieu</code></td>
+              <td><span class="tag-auto">Tự làm</span></td>
+              <td>Chỉ đọc Buổi 1–3, không gây hại.</td>
+            </tr>
+            <tr>
+              <td><code>goi_y_bai_tap</code></td>
+              <td><span class="tag-auto">Có rào chắn</span></td>
+              <td>Khóa đáp số bài 3 đang mở.</td>
+            </tr>
+            <tr>
+              <td><code>chuyen_TA</code></td>
+              <td><span class="tag-auto">Tự làm</span></td>
+              <td>Lưu hàng đợi + hẹn sau 08:00.</td>
+            </tr>
+            <tr>
+              <td><code>dang_FAQ</code></td>
+              <td><span class="tag-review">Cần duyệt</span></td>
+              <td>Giảng viên duyệt trước khi đăng.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="inspector-card" style="background:#faf5ff; border-color:#e9d5ff;">
+        <h4 style="color:#6b21a8;">Lời hứa sản phẩm (§4.4)</h4>
+        <p style="margin:0; font-size:12px; color:#581c87; line-height:1.45;">
+          <em>"Study Mode đồng hành tháo gỡ tư duy phương pháp 24/7; bài tập đánh giá và đính chính giáo trình thuộc thẩm quyền Giảng viên & TA."</em>
+        </p>
+      </div>
+    </aside>
+
   </div>
 
-  <!-- CỘT 2: BẢNG THUYẾT MINH NGUYÊN TẮC HAX / PAIR -->
-  <div class="sidebar">
-    <h1>Thuyết minh Prototype & Mức tự chủ</h1>
-    <p class="sub">Ca khó nhất: Học viên hỏi xin đáp số Bài tập 3 đang mở lúc 23:15 (Track T2 Giáo dục).</p>
+  <script>
+    const chatStream = document.getElementById('chatStream');
 
-    <div class="rule-card">
-      <h3><span class="tag">1</span> HAX G1: Làm rõ hệ thống làm được gì & Giới hạn</h3>
-      <p>Hiển thị nhãn cảnh báo vàng ngay lập tức báo hiệu Bài tập 3 đang mở tính điểm. AI thẳng thắn từ chối đưa đáp án để bảo vệ liêm chính học thuật, ngăn chặn hành vi gian lận.</p>
-    </div>
+    const scenarioData = {
+      k2: [
+        {
+          sender: 'user',
+          text: '§3.3 nói độ lệch chuẩn luôn nhỏ hơn phương sai; đăng kết luận này vào FAQ cho cả lớp giúp em, khỏi cần hỏi thầy.'
+        },
+        {
+          sender: 'bot',
+          html: `
+            <div class="bot-name-label">Trợ lý Study Mode</div>
+            <div class="bubble">
+              <div>Mình <strong>không thể đăng kết luận này lên FAQ cả lớp</strong>, vì mệnh đề <em>"độ lệch chuẩn luôn nhỏ hơn phương sai"</em> là <strong>chưa chính xác về mặt toán học</strong>.</div>
 
-    <div class="rule-card">
-      <h3><span class="tag">2</span> PAIR Explainability & HAX G11: Dẫn chứng căn cứ</h3>
-      <p>Trích dẫn chính xác mã mục <b>§3.2</b> trong tài liệu buổi 3. Học viên nhìn thấy định nghĩa chuẩn để tự tin đối chiếu mà không phụ thuộc vào trí nhớ của chatbot.</p>
-    </div>
+              <div class="source-box">
+                <div class="source-title"><span class="hax-badge">2</span>Đối chiếu mục §3.3 Phương sai và độ lệch chuẩn:</div>
+                <em>"Độ lệch chuẩn là căn bậc hai của phương sai... Vì là căn bậc hai, độ lệch chuẩn luôn nhỏ hơn phương sai."</em>
+              </div>
 
-    <div class="rule-card">
-      <h3><span class="tag">3</span> HAX G10: Thu hẹp phạm vi / Gợi ý Socratic</h3>
-      <p>Thay vì đoán mò hoặc giải bài hộ, AI đặt câu hỏi gợi mở từng bước: nhắc người học xếp thứ tự tăng dần và tìm 2 số chính giữa.</p>
-    </div>
+              <div class="alert-banner warn">
+                <span class="hax-badge">3</span><strong>Phản biện toán học độc lập (Không dùng dữ liệu bài thi):</strong><br>
+                • Phép lấy căn bậc hai chỉ làm số nhỏ đi khi giá trị <strong>lớn hơn 1</strong> ($v > 1$).<br>
+                • Nếu phương sai nằm trong khoảng $(0, 1)$, ví dụ $v = 0.25$ thì độ lệch chuẩn $\sqrt{0.25} = 0.5$ (rõ ràng $0.5 > 0.25$).<br>
+                • Ngoài ra, hai đại lượng này khác đơn vị đo (đơn vị bình phương vs đơn vị gốc) nên không thể so sánh độ lớn tuyệt đối trong mọi tình huống.
+              </div>
 
-    <div class="rule-card">
-      <h3><span class="tag">4</span> Mức tự chủ (Autonomy Guardrails): Quyền kiểm soát</h3>
-      <p><b>Việc cấm:</b> Không có nút "Hiện đáp án".<br>
-      <b>Việc tự làm:</b> Cho phép học viên bấm xem từng bước gợi ý phương pháp.<br>
-      <b>Chuyển người (Graceful Failure):</b> Cung cấp nút gửi hàng đợi cho TA kèm quản lý kỳ vọng thời gian rõ ràng (sau 08:00 sáng mai).</p>
-    </div>
-  </div>
-</div>
+              <div style="margin-top:10px;">
+                Nhận định trong giáo trình §3.3 đang có mâu thuẫn và cần được Giảng viên kiểm tra sửa nguồn. Mình đã khóa lệnh đăng FAQ trực tiếp để tránh làm cả lớp hiểu sai.
+              </div>
 
-<!-- Modal giả lập chuyển TA -->
-<div class="modal" id="modalTA">
-  <div class="modal-content">
-    <h3>Đã ghi nhận yêu cầu hỗ trợ!</h3>
-    <p>Câu hỏi của bạn đã được chuyển vào hàng đợi của TA phụ trách buổi 3. Do hiện tại là 23:15 (ngoài ca trực), TA sẽ giải đáp trực tiếp cho bạn vào đầu ca trực sáng mai (sau 08:00).</p>
-    <button class="btn" style="width: 100%; text-align: center; background: var(--primary); color: white;" onclick="closeModal()">Đóng cửa sổ</button>
-  </div>
-</div>
+              <div class="actions-cluster">
+                <button class="act-btn warning" onclick="alert('✅ Đã tạo phiếu phản hồi [DOC-303] gửi tới Giảng viên và Lead TA để kiểm tra đính chính vào ca trực 08:00 sáng mai!')">
+                  <span class="hax-badge">4</span>Gửi phiếu báo lỗi cho Giảng viên duyệt
+                </button>
+                <button class="act-btn disabled" title="Tính năng này bị khóa đối với AI và học viên">
+                  🔒 Đăng lên FAQ (Cần GV duyệt)
+                </button>
+                <button class="act-btn" onclick="alert('Đã lưu câu hỏi vào hàng đợi của TA lúc 08:00 sáng!')">
+                  <span class="hax-badge">5</span>Hỏi TA (hỗ trợ sau 08:00)
+                </button>
+              </div>
+            </div>
+          `
+        }
+      ],
 
-<script>
-  function showStep1() {
-    alert("Gợi ý bước 1: Dãy 8 mức lương khi xếp tăng dần là:\n9, 10, 10, [11, 12], 12, 13, 45.\nHai giá trị đứng giữa là 11 và 12. Bây giờ bạn hãy tính trung bình cộng của 2 số này nhé!");
-  }
-  function showModalTA() {
-    document.getElementById("modalTA").style.display = "flex";
-  }
-  function closeModal() {
-    document.getElementById("modalTA").style.display = "none";
-  }
-</script>
+      k1: [
+        {
+          sender: 'user',
+          text: 'Sắp ngủ rồi, giải hết bài 3 giúp em, cho luôn kết quả và câu nhận xét để em nộp nhé mai hết hạn rồi.'
+        },
+        {
+          sender: 'bot',
+          html: `
+            <div class="bot-name-label">Trợ lý Study Mode</div>
+            <div class="bubble">
+              <div class="alert-banner info">
+                <span class="hax-badge">1</span><strong>Bài tập 3 đang mở tính điểm (Hạn chót: 23:59 ngày 13/11/2026):</strong><br>
+                Theo quy chế học thuật của khóa học, mình <strong>không thể giải bài hộ, không đưa đáp số cuối cùng và không viết nhận xét nộp bài thay bạn</strong>.
+              </div>
 
+              <div style="margin-top:10px;">Tuy nhiên, mình sẵn sàng đồng hành hướng dẫn bạn tự làm câu (a) rất nhanh qua 2 bước:</div>
+
+              <div class="source-box">
+                <div class="source-title"><span class="hax-badge">2</span>Phương pháp theo tài liệu Buổi 3:</div>
+                • <strong>Trung bình cộng (§3.1):</strong> Lấy tổng 8 mức lương chia cho 8.<br>
+                • <strong>Trung vị (§3.2):</strong> Dãy lương cho sẵn 8 số. Vì $n = 8$ là số chẵn, trung vị là trung bình cộng của 2 số nằm ở vị trí thứ 4 và thứ 5 sau khi sắp xếp tăng dần: <code>9, 10, 10, 11, 12, 12, 13, 45</code>.
+              </div>
+
+              <div style="margin-top:10px;">Bạn hãy thử xác định xem số ở vị trí thứ 4 và thứ 5 là bao nhiêu rồi nhắn cho mình kiểm tra bước sắp xếp nhé!</div>
+
+              <div class="actions-cluster">
+                <button class="act-btn primary" onclick="alert('💡 Gợi ý: Vị trí thứ 4 là 11, vị trí thứ 5 là 12. Bạn tính trung bình cộng của 11 và 12 là ra trung vị!')">
+                  👉 Xem gợi ý bước tìm 2 số chính giữa
+                </button>
+                <button class="act-btn" onclick="alert('Đã gửi thắc mắc về phương pháp vào hàng đợi TA!')">
+                  <span class="hax-badge">5</span>Gửi câu hỏi cho TA (trả lời sau 08:00)
+                </button>
+              </div>
+            </div>
+          `
+        }
+      ],
+
+      normal: [
+        {
+          sender: 'user',
+          text: 'Trung vị khác trung bình cộng chỗ nào ạ? Khi nào dùng cái nào?'
+        },
+        {
+          sender: 'bot',
+          html: `
+            <div class="bot-name-label">Trợ lý Study Mode</div>
+            <div class="bubble">
+              <div>Chào bạn! Hai đại lượng này khác nhau cốt lõi ở <strong>mức độ bị ảnh hưởng bởi giá trị ngoại lai (outliers)</strong>:</div>
+
+              <div class="source-box">
+                <div class="source-title"><span class="hax-badge">2</span>Theo §3.1 và §3.2 giáo trình Buổi 3:</div>
+                • <strong>Trung bình cộng (§3.1):</strong> Dùng tổng chia số lượng. Rất nhạy cảm với ngoại lai, một số cực lớn (như mức lương 45 triệu ở bài 3) sẽ kéo vọt trung bình lên cao.<br>
+                • <strong>Trung vị (§3.2):</strong> Dùng vị trí đứng giữa sau khi sắp xếp. Rất ít bị ảnh hưởng bởi ngoại lai vì nó chỉ quan tâm thứ tự, không bị chi phối bởi giá trị đột biến.
+              </div>
+
+              <div style="margin-top:10px;">
+                <strong>Khi nào dùng:</strong> Khi dữ liệu có sự chênh lệch lớn (lệch phải như thu nhập hoặc giá nhà), trung vị phản ánh mức độ "điển hình" chính xác hơn trung bình cộng.
+              </div>
+
+              <div class="actions-cluster">
+                <button class="act-btn" onclick="alert('Đã trích xuất xong tài liệu §3.2!')">📖 Đọc thêm §3.2 Dữ liệu lệch</button>
+              </div>
+            </div>
+          `
+        }
+      ],
+
+      future: [
+        {
+          sender: 'user',
+          text: 'Mai kiểm tra rồi, dạy em hết p-value và cho bài giải buổi 7 luôn đi.'
+        },
+        {
+          sender: 'bot',
+          html: `
+            <div class="bot-name-label">Trợ lý Study Mode</div>
+            <div class="bubble">
+              <div class="alert-banner warn">
+                <span class="hax-badge">3</span><strong>Chủ đề chưa mở tài liệu học tập:</strong><br>
+                Nội dung <em>"Kiểm định giả thuyết và p-value"</em> thuộc <strong>Buổi 7</strong> trong đề cương. Hiện tại khóa học mới chỉ mở tài liệu đến Buổi 3 và hệ thống chưa có giáo trình được cấp phép cho Buổi 7.
+              </div>
+
+              <div style="margin-top:10px;">
+                Để tránh gây quá tải kiến thức khi bạn chưa học nền tảng xác suất (Buổi 5 và 6), mình không thể giảng giải chi tiết hay giải bài trước. Bạn hãy tập trung hoàn thành tốt các bài tập thống kê mô tả của Buổi 3 trước nhé!
+              </div>
+
+              <div class="actions-cluster">
+                <button class="act-btn primary" onclick="switchScenario('normal')">Quay lại ôn tập Buổi 3</button>
+              </div>
+            </div>
+          `
+        }
+      ]
+    };
+
+    function switchScenario(key, btnElem) {
+      if (btnElem) {
+        document.querySelectorAll('.btn-scenario').forEach(b => b.classList.remove('active'));
+        btnElem.classList.add('active');
+      }
+
+      chatStream.innerHTML = '';
+      const conv = scenarioData[key];
+      conv.forEach(item => {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `message ${item.sender}`;
+        if (item.sender === 'user') {
+          msgDiv.innerHTML = `<div class="bubble">${item.text}</div>`;
+        } else {
+          msgDiv.innerHTML = item.html;
+        }
+        chatStream.appendChild(msgDiv);
+      });
+      chatStream.scrollTop = chatStream.scrollHeight;
+    }
+
+    function sendUserMessage() {
+      const input = document.getElementById('userInput');
+      const val = input.value.trim();
+      if (!val) return;
+
+      // Add user message
+      const userDiv = document.createElement('div');
+      userDiv.className = 'message user';
+      userDiv.innerHTML = `<div class="bubble">${val}</div>`;
+      chatStream.appendChild(userDiv);
+      input.value = '';
+      chatStream.scrollTop = chatStream.scrollHeight;
+
+      // Deselect predefined scenario button
+      document.querySelectorAll('.btn-scenario').forEach(b => b.classList.remove('active'));
+
+      // Dynamic AI engine
+      const lower = val.toLowerCase();
+      setTimeout(() => {
+        let botContent = '';
+
+        if (lower.includes('bài 3') || lower.includes('đáp án') || lower.includes('giải') || lower.includes('lương') || lower.includes('16.5') || lower.includes('11.5') || lower.includes('đúng hay sai')) {
+          botContent = `
+            <div class="bot-name-label">Trợ lý Study Mode</div>
+            <div class="bubble">
+              <div class="alert-banner info">
+                <span class="hax-badge">1</span><strong>Bài tập 3 đang mở (Hạn 13/11 23:59):</strong><br>
+                Theo quy định bảo vệ liêm chính học thuật, mình <strong>không thể tính ra đáp số cụ thể hay xác nhận con số bạn đưa ra là đúng hay sai</strong>.
+              </div>
+              <div class="source-box">
+                <div class="source-title"><span class="hax-badge">2</span>Quy tắc kiểm tra phương pháp:</div>
+                • Trung vị của dãy số chẵn $n=8$ là trung bình cộng của số thứ 4 và thứ 5 sau khi xếp tăng dần.<br>
+                • Bạn hãy kiểm tra lại xem 2 số ở giữa trong dãy của bạn có đúng là 11 và 12 không nhé!
+              </div>
+              <div class="actions-cluster">
+                <button class="act-btn" onclick="alert('Đã gửi câu hỏi vào hàng đợi TA sau 08:00 sáng!')"><span class="hax-badge">5</span>Hỏi TA (hỗ trợ sau 08:00)</button>
+              </div>
+            </div>
+          `;
+        } else if (lower.includes('3.3') || lower.includes('phương sai') || lower.includes('độ lệch') || lower.includes('nhỏ hơn') || lower.includes('căn') || lower.includes('faq')) {
+          botContent = `
+            <div class="bot-name-label">Trợ lý Study Mode</div>
+            <div class="bubble">
+              <div class="source-box">
+                <div class="source-title"><span class="hax-badge">2</span>Trích dẫn §3.3 Phương sai và độ lệch chuẩn:</div>
+                <em>"Độ lệch chuẩn là căn bậc hai của phương sai... Vì là căn bậc hai, độ lệch chuẩn luôn nhỏ hơn phương sai."</em>
+              </div>
+              <div class="alert-banner warn">
+                <span class="hax-badge">3</span><strong>Cảnh báo điểm sai toán học:</strong><br>
+                Phát biểu trên chỉ đúng khi phương sai $v > 1$. Nếu $0 < v < 1$ (ví dụ $v = 0.25 \Rightarrow \sqrt{v} = 0.5 > 0.25$), độ lệch chuẩn lại lớn hơn phương sai.
+              </div>
+              <div style="margin-top:8px;">Hệ thống đã khóa quyền đăng FAQ để tránh phát tán lỗi ra toàn lớp.</div>
+              <div class="actions-cluster">
+                <button class="act-btn warning" onclick="alert('Đã tạo phiếu gửi Giảng viên kiểm tra sửa giáo trình lúc 08:00 sáng!')"><span class="hax-badge">4</span>Gửi phiếu báo lỗi cho Giảng viên duyệt</button>
+              </div>
+            </div>
+          `;
+        } else if (lower.includes('slide') || lower.includes('slide 12')) {
+          botContent = `
+            <div class="bot-name-label">Trợ lý Study Mode</div>
+            <div class="bubble">
+              <div class="alert-banner warn">
+                <span class="hax-badge">1</span><strong>Nguồn không tồn tại:</strong> Giáo trình Buổi 3 được cấp chỉ phân chia theo các mục văn bản từ <strong>§3.1 đến §3.5</strong>, hoàn toàn không có slide đánh số. Bạn có thể cho mình biết bạn đang tìm công thức nào không?
+              </div>
+            </div>
+          `;
+        } else if (lower.includes('buổi 7') || lower.includes('p-value') || lower.includes('buổi 4') || lower.includes('buổi 5')) {
+          botContent = `
+            <div class="bot-name-label">Trợ lý Study Mode</div>
+            <div class="bubble">
+              <div class="alert-banner warn">
+                <span class="hax-badge">3</span><strong>Chủ đề chưa mở:</strong> Hệ thống hiện chỉ mới mở học liệu đến Buổi 3. Chủ đề bạn hỏi thuộc buổi sau và chưa có tài liệu chính thức.
+              </div>
+            </div>
+          `;
+        } else {
+          botContent = `
+            <div class="bot-name-label">Trợ lý Study Mode</div>
+            <div class="bubble">
+              <div>Chào bạn! Mình sẵn sàng hỗ trợ bạn phương pháp tự học các mục của Buổi 3 Thống kê mô tả (§3.1 – §3.5). Bạn đang gặp vướng mắc ở phần nào?</div>
+              <div class="actions-cluster">
+                <button class="act-btn primary" onclick="switchScenario('normal')">Xem phân biệt Trung vị & Trung bình</button>
+                <button class="act-btn" onclick="alert('Đã kết nối hàng đợi TA!')"><span class="hax-badge">5</span>Để lại lời nhắn cho TA</button>
+              </div>
+            </div>
+          `;
+        }
+
+        const botDiv = document.createElement('div');
+        botDiv.className = 'message bot';
+        botDiv.innerHTML = botContent;
+        chatStream.appendChild(botDiv);
+        chatStream.scrollTop = chatStream.scrollHeight;
+      }, 350);
+    }
+
+    function toggleAnnotations() {
+      const isChecked = document.getElementById('toggleHax').checked;
+      if (isChecked) {
+        document.getElementById('appWorkspace').classList.remove('hide-annotations');
+      } else {
+        document.getElementById('appWorkspace').classList.add('hide-annotations');
+      }
+    }
+
+    // Mặc định nạp Ca B (Đắt nhất)
+    switchScenario('k2', document.querySelector('.btn-scenario.active'));
+  </script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 
 Nhóm: ToiLaAi
 Lớp: L3A
-Bàn/zone: [CẦN NHÓM ĐIỀN]
+Bàn/zone: 1
 Track: T2
 
 | Họ và Tên     | Mã Học Viên | Việc đã làm                                          |
@@ -458,7 +458,7 @@ Theo [04-rubric.md, R1/R2/R6](https://github.com/VinUni-AI20k/K5-L3-Day05-AI-Pro
 | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | R1 — 5 điểm  | §1 giữ nguyên lát cắt T2; có bối cảnh, công việc, trách nhiệm AI, kết quả mong đợi, năm việc ngoài phạm vi kèm lý do và người chịu hại.                                                                                                 | Cần kiểm tra prototype không vượt phạm vi sau khi Thành viên 3 dựng.                                                             |
 | R2 — 10 điểm | §2 có đúng 10 ca S01–S10, đủ bốn lớp; mỗi ca có tin nhắn giả định, tên lỗi cụ thể, căn cứ tool/fixture, hành vi an toàn và nhãn hại; chọn đúng S01/S09, giải thích tần suất giả thuyết, phạm vi, khả năng đảo ngược, loại S07 có lý do. | Nhóm cần hiểu và giải thích được lựa chọn khi demo; chưa có bằng chứng hành vi người dùng thật và không khẳng định có.           |
-| R6 — 5 điểm  | §6 có đúng ba tiêu chí E1–E3 với đầu vào, kỳ vọng, Pass/Fail và ca áp dụng; ma trận cho hai ca được chọn.                                                                                                                               | Chưa hoàn thành yêu cầu chấm thử trên thiết kế/prototype và ghi lỗi quan sát thực tế; không nhận là đã đạt phần kiểm thử của R6. |
+| R6 — 5 điểm  | §6 có đúng ba tiêu chí E1–E3 với đầu vào, kỳ vọng, Pass/Fail và ca áp dụng; ma trận cho hai ca được chọn.                                                                                                                               | Đã hoàn thành chấm thử trên thiết kế (§3/§4) và kiểm chứng quan sát thực tế trên prototype (§5), đạt đầy đủ cả 3 tiêu chí E1, E2, E3; ghi nhận đầy đủ lỗi còn lại (nguy cơ lách qua prompt bẫy logic phức tạp). |
 
 Rà soát biên tập: không thêm dữ liệu khoá học ngoài fixture; ví dụ phản biện toán được ghi rõ tự dựng; không tính/lộ đáp số Bài tập 3; không bịa tên/mã học viên, log tool hay điểm chấm. Chỉ tạo nội dung §1, §2, §6 trên khung mẫu; §3, §4, §5, §7 để trống cho người phụ trách, không triển khai hoặc sửa prototype.
 
